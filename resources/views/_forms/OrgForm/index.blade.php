@@ -33,7 +33,7 @@
         </div>
         <div class="form-floating">
             <textarea class="form-control" placeholder="Descreva aqui"
-                id="descricao" style="height: 150px;"value="{{ isset($organizacao->descricao) ? $organizacao->descricao : old('vc_descricao')}}"></textarea>
+                id="descricao" style="height: 150px;">{{ isset($organizacao->descricao) ? $organizacao->descricao : old('vc_descricao')}}</textarea>
             <label for="descricao">Descrição</label>
 
             @error('descricao')

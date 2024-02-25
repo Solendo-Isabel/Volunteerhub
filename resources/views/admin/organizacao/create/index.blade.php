@@ -13,25 +13,26 @@
         </div>
     </form>
 
+    <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
     @if (session('organizacao.create.success'))
-        <script>
-            Swal.fire(
-                'Organização Cadastrada Com Sucesso!',
-                '',
-                'success'
-            )
-        </script>
-    @endif
-
-    @if (session('organizacao.create.error'))
-        <script>
-            Swal.fire(
-                'Erro ao cadastrar Organização',
-                '',
-                'error'
-            )
-        </script>
-
+            <script>
+                Swal.fire(
+                    'Organização Cadastrada Com Sucesso!',
+                    '',
+                    'success'
+                )
+            </script>
         @endif
 
-@endsection
+        @if (session('organizacao.create.error'))
+            <script>
+                Swal.fire(
+                    'Erro ao cadastrar Organização',
+                    '',
+                    'error'
+                )
+            </script>
+
+            @endif
+
+    @endsection

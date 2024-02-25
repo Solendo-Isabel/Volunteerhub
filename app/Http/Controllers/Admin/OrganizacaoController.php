@@ -38,14 +38,13 @@ class OrganizacaoController extends Controller
                 'vc_nome'=>$request->vc_nome,
                 'descricao'=>$request->descricao,
                 'unid_comando'=>$request->unid_comando
+                
             ]);
-
-            dd($organizacao);
 
             return redirect()->back()->with('organizacao.create.success',1);
         } catch (\Throwable $th) {
             //throw $th;
-            dd($organizacao);
+
             return redirect()->back()->with('organizacao.create.error',1);
         }
 
