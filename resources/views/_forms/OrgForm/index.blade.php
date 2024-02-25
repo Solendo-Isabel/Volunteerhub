@@ -1,14 +1,6 @@
 <div class="row">
 
-    @isset($organizacao->imagem)
-        <div class="col-sm-12 col-xl-9 offset-md-1 mb-4">
-            <div class="card card-outline-info h-100">
-                <img src="{{ asset($organizacao->imagem) }}" alt="Imagem que representa a organização" class="grayscale img-fluid mx-auto d-block" width="200">
-            </div>
-        </div>
-    @endisset
-
-<div class="col-sm-12 col-xl-9 offset-md-1">
+<div class="col-sm-12 col-xl-10 offset-md-1">
     <div class="bg-secondary rounded h-100 p-4">
         <h6 class="mb-4">Organizações</h6>
         <div class="form-floating mb-3">
@@ -57,3 +49,13 @@
          </div>
     </div>
 </div>
+
+<style>
+    .form-control{
+        background: #fff !important;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: solid 2px #cdcdcd
+    }
+</style>

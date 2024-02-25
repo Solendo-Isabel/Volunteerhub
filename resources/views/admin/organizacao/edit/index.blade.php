@@ -1,17 +1,15 @@
 @extends('layouts.admin.body')
-@section('titulo', 'Editar Organização')
+@section('titulo', 'Editar Organizações')
 
 @section('conteudo')
 
-<h3 class="p-4">Cadastrar Organização</h3>
+    <h3 class="p-4 pb-0" style="color:#312f2f">Editar Organização</h3>
 
-    <form action="{{ route('admin.organizacao.update', ['id'=>$organizacao->id]) }}" method="post" enctype="multipart/form-data" >
+    <form action="{{ route('admin.organizacao.update',['id'=>$organizacao->id]) }}" method="post" enctype="multipart/form-data" class="mt-3 mb-5">
         @csrf
         <div class="card-body">
             @include('_forms.OrgForm.index')
-
-            <button class="btn btn-outline-primary w-100 m-2" style="width: 100px !important">Editar</button>
-        </div>
+                <button class="btn btn-outline-primary w-100 m-2" style="width: 82% !important; margin-left: 9% !important; color: #fff; background:linear-gradient(to left,#7357D6,#8b329d8a,#9479f6)"><strong>Editar</strong></button>
         </div>
     </form>
 
@@ -19,7 +17,7 @@
     @if (session('organizacao.update.success'))
             <script>
                 Swal.fire(
-                    'Organização Atuatizada Com Sucesso!',
+                    'Organização Editada Com Sucesso!',
                     '',
                     'success'
                 )
@@ -29,7 +27,7 @@
     @if (session('organizacao.update.error'))
             <script>
                 Swal.fire(
-                    'Erro ao Atuatizar Organização',
+                    'Erro ao Editar Organização',
                     '',
                     'error'
                 )
@@ -37,4 +35,4 @@
 
         @endif
 
-@endsection
+    @endsection
