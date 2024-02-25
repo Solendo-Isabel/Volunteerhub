@@ -21,34 +21,34 @@ class OrganizacaoController extends Controller
      * @return Illuminatw\Http\Response
     */
 
-    public function store(Request $request){
-        $request->validate([
-            'vc_nome'=>'required',
-            'descricao'=>'required',
-            'unid_comando'=>'request'
-
-        ],[
-            'vc_nome.required'=>'Campo obrigatório',
-            'descricao.required'=>'Campo obrigatório',
-            'unid_comando'=>'Campo obrigatório'
-        ]);
-
+    public function store(Request $request)
+    {
         try {
-           $organizacao=Organizacao::create([
-                'vc_nome'=>$request->vc_nome,
-                'descricao'=>$request->descricao,
-                'unid_comando'=>$request->unid_comando
-                
+            $request->validate([
+                'vc_nome' => 'required',
+                'descricao' => 'required',
+                'unid_comando' => 'required' // Corrigi o typo em 'required'
+            ], [
+                'vc_nome.required' => 'Campo obrigatório',
+                'descricao.required' => 'Campo obrigatório',
+                'unid_comando.required' => 'Campo obrigatório' // Adicionei 'required' aqui
             ]);
-
-            return redirect()->back()->with('organizacao.create.success',1);
+    
+            // Se chegou até aqui, a validação foi bem-sucedida
+    
+            $organizacao = Organizacao::create([
+                'vc_nome' => $request->vc_nome,
+                'descricao' => $request->descricao,
+                'unid_comando' => $request->unid_comando
+            ]);
+    
+            return redirect()->back()->with('organizacao.create.success', 1);
         } catch (\Throwable $th) {
-            //throw $th;
-
-            return redirect()->back()->with('organizacao.create.error',1);
+            // Se ocorrer uma exceção, trata o erro
+            // Pode adicionar logs ou outras ações de tratamento de erro aqui
+    
+            return redirect()->back()->with('organizacao.create.error', 1);
         }
-
-
     }
 
     /**

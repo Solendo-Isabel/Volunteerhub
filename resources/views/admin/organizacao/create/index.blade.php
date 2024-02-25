@@ -22,9 +22,9 @@
                     'success'
                 )
             </script>
-        @endif
+    @endif
 
-        @if (session('organizacao.create.error'))
+    @if (session('organizacao.create.error'))
             <script>
                 Swal.fire(
                     'Erro ao cadastrar Organização',
@@ -33,6 +33,6 @@
                 )
             </script>
 
-            @endif
+        @endif
 
     @endsection

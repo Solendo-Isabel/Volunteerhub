@@ -15,8 +15,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::/*middleware(['auth'])->*/namespace('App\Http\Controllers\Admin')->group(function(){
 
-Route::prefix('organizacao')->group(function(){
-        Route::get('organizacao', ['as' => 'admin.organizacao.index', 'uses'=> 'OrganizacaoController@index']);
 
-    });
 });
