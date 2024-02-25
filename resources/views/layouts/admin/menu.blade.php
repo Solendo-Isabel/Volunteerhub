@@ -20,7 +20,7 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Organização</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ route('admin.organizacao.create.index') }}" class="dropdown-item">Criar</a>
-                    <a href="typography.html" class="dropdown-item">Editar</a>
+                    <a href="{{ route('admin.organizacao.index') }}" class="dropdown-item">Listar</a>
                 </div>
             </div>
         </div>

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('vc_nome');
             $table->text('descricao');
             $table->string('unid_comando');
+            $table->string('imagem');
             $table->timestamps();
             $table->softDeletes();
         });

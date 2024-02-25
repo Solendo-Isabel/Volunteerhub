@@ -13,9 +13,10 @@ class Organizacao extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'nome',
+        'vc_nome',
         'descricao',
-        'unid_comando'
+        'unid_comando',
+        'imagem'
     ];
 
     protected $table = 'organizacoes';

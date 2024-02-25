@@ -9,7 +9,8 @@ use App\Models\Organizacao;
 class OrganizacaoController extends Controller
 {
     public function index(){
-        return view('admin.organizacao.index');
+        $data['organizacoes']=Organizacao::all();
+        return view('admin.organizacao.index',$data);
     }
 
     public function create(){
@@ -27,26 +28,36 @@ class OrganizacaoController extends Controller
             $request->validate([
                 'vc_nome' => 'required',
                 'descricao' => 'required',
-                'unid_comando' => 'required' // Corrigi o typo em 'required'
+                'unid_comando' => 'required', // Corrigi o typo em 'required'
+                'imagem' => 'required'
             ], [
                 'vc_nome.required' => 'Campo obrigatório',
                 'descricao.required' => 'Campo obrigatório',
-                'unid_comando.required' => 'Campo obrigatório' // Adicionei 'required' aqui
+                'unid_comando.required' => 'Campo obrigatório', // Adicionei 'required' aqui
+                'imagem.required' => 'Campo obrigatório'
             ]);
-    
+
             // Se chegou até aqui, a validação foi bem-sucedida
-    
-            $organizacao = Organizacao::create([
-                'vc_nome' => $request->vc_nome,
-                'descricao' => $request->descricao,
-                'unid_comando' => $request->unid_comando
-            ]);
-    
+
+            if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+                $caminho = $this->carregar_imagem($request);
+
+                $organizacao = Organizacao::create([
+                    'vc_nome' => $request->vc_nome,
+                    'descricao' => $request->descricao,
+                    'unid_comando' => $request->unid_comando,
+                    'imagem' =>$caminho
+                ]);
+
+            }
+
+
             return redirect()->back()->with('organizacao.create.success', 1);
         } catch (\Throwable $th) {
             // Se ocorrer uma exceção, trata o erro
             // Pode adicionar logs ou outras ações de tratamento de erro aqui
-    
+
+
             return redirect()->back()->with('organizacao.create.error', 1);
         }
     }
@@ -67,24 +78,43 @@ class OrganizacaoController extends Controller
      * @return Illuminate\Http\Response
     */
 
-    public function update(Request $request,$id){
-        $request->validate([
-            'vc_nome'=>'required',
-            'descricao'=>'required',
-            'unid_comando'=>'request'
-
-        ],[
-            'vc_nome.required'=>'Campo obrigatório',
-            'descricao.required'=>'Campo obrigatório',
-            'unid_comando'=>'Campo obrigatório'
-        ]);
+    public function update(Request $request , $id){
 
         try {
-            Organizacao::findOrFail($id)->update([
-                'vc_nome'=>$request->vc_nome,
-            'descricao'=>$request->descricao,
-            'unid_comando'=>$request->unid_comando]
-             );
+
+            $org=Organizacao::find($id);
+
+            $request->validate([
+                'vc_nome'=>'required',
+                'descricao'=>'required',
+                'unid_comando'=>'required',
+                'imagem' => 'required'
+
+            ],[
+                'vc_nome.required'=>'Campo obrigatório',
+                'descricao.required'=>'Campo obrigatório',
+                'unid_comando.required'=>'Campo obrigatório',
+                'imagem.required' => 'Campo obrigatório'
+            ]);
+
+            if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+                $caminho= $this->carregar_imagem($request);
+
+                if (isset($org->imagem)) {
+                    $path = public_path($org->imagem);
+                    unlink($path);
+                }
+
+                $organizacao=Organizacao::findOrFail($id)->update([
+                    'vc_nome'=>$request->vc_nome,
+                'descricao'=>$request->descricao,
+                'unid_comando'=>$request->unid_comando,
+                'imagem'=> $caminho
+                ]);
+
+            }
+
+
 
             return redirect()->back()->with('organizacao.update.success',1);
         } catch (\Throwable $th) {
@@ -100,8 +130,8 @@ class OrganizacaoController extends Controller
 
     public function delete($id){
         try {
-            $organizacao=Organizacao::find($id);
-            Organizacao::findOrFail()->delete();
+            $organizacao=Organizacao::findOrFail($id);
+            Organizacao::findOrFail($id)->delete();
 
             return redirect()->back()->with('organizacao.delete.success',1);
         } catch (\Throwable $th) {
@@ -113,13 +143,31 @@ class OrganizacaoController extends Controller
 
     public function purge($id){
         try {
-            $organizacao=Organizacao::find($id);
-            Organizacao::findOrFail()->forceDelete();
+            $organizacao=Organizacao::findOrFail($id);
+            Organizacao::findOrFail($id)->forceDelete();
 
             return redirect()->back()->with('organizacao.purge.success',1);
         } catch (\Throwable $th) {
             return redirect()->back()->with('organizacao.purge.error',1);
             //throw $th;
         }
-}
+    }
+
+    public function carregar_imagem(Request $request){
+        $name = uniqid(date('HisYmd'));
+        $organizacao = $request->file('imagem');
+
+        $extension = $request->imagem->extension();
+        $nameFile = "{$name}.{$extension}";
+        $destionationPath = public_path("images/organizacao");
+        $organizacao->move($destionationPath, $nameFile);
+
+        $caminho = "images/organizacao/" . $nameFile;
+
+        if (!$caminho) {
+            return redirect()->back()->with('error','Falha ao carregar imagem')->withInput();
+        } else {
+            return $caminho;
+        }
+    }
 }
