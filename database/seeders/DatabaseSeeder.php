@@ -39,7 +39,8 @@ class DatabaseSeeder extends Seeder
             'municipio' => 'Cazenga',
             'genero' => 'F',
             'password'=> Hash::make("12345678"),
-            'it_id_org' => '1'
+            'it_id_org' => '1',
+            'imagem' => 'alguma string'
         ]);
     }
 }

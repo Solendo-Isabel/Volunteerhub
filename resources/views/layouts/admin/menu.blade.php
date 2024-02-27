@@ -28,12 +28,18 @@
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ route('admin.membro.create.index') }}" class="dropdown-item">Criar</a>
                     <a href="{{ route('admin.membro.index') }}" class="dropdown-item">Listar</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Associado</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('admin.associado.create.index') }}" class="dropdown-item">Criar</a>
+                            <a href="{{ route('admin.associado.index') }}" class="dropdown-item">Listar</a>
+                        </div>
                 </div>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown mt-3">
                     <form action="/logout" method="POST">
                                   @csrf
-                                  <a href="/logout" class="btn btn-primary
-                                  " onclick="event.preventDefault();
+                                  <a href="/logout"  class="btn btn-primary
+                                  "  style="width:80%;margin-left:5px;" onclick="event.preventDefault();
                                   this.closest('form').submit();">LogOut</a>
                               </form>
                 </li>

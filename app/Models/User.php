@@ -31,10 +31,11 @@ class User extends Authenticatable
         'telefone',
         'email',
         'provincia',
-        'muniipio',
+        'municipio',
         'genero',
         'password',
-        'it_id_org'
+        'it_id_org',
+        'imagem'
     ];
 
     /**

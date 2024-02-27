@@ -147,6 +147,18 @@
         </span>
         @enderror
         </div>
+
+        <div class="form-floating mb-3">
+            <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*"
+                placeholder="Selecione a imagem" value="{{ isset($user->imagem) ? $user->imagem : old('imagem')}}">
+            <label for="imagem">Imagem</label>
+
+            @error('imagem')
+            <span class="invalid-feedbackj" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+     </div>
 </div>
 
 <style>

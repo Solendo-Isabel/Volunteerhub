@@ -1,5 +1,5 @@
 @extends('layouts.admin.body')
-@section('titulo','Listar Membros')
+@section('titulo','Listar Associados')
 
 @section('conteudo')
 
@@ -23,52 +23,34 @@
         </div>
       </form>
     <div class="bg-secondary rounded h-100 p-4">
-        <h6 class="mb-4">Membros</h6>
+        <h6 class="mb-4">Associados</h6>
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nome</th>
-                        <th scope="col">BI</th>
-                        <th scope="col">Gênero</th>
-                        <th scope="col">Telefone</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Província</th>
-                        <th scope="col">Municipio</th>
-                        <th scope="col">Organização</th>
-                        <th scope="col">###</th>
+                        <th scope="col">Credencial</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach ($users as $user)
+                    @foreach ($associados as $ass)
                         <tr>
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->vc_pr_nome }} {{ $user->vc_nome_meio }} {{ $user->vc_ult_nome }}</td>
-                            <td>{{ $user->BI }}</td>
-                            @if ($user->genero == "M")
-                                <td>Masculino</td>
-                            @endif
-                            @if ($user->genero == "F")
-                                <td>Feminino</td>
-                            @endif
-                            <td>{{ $user->telefone }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->provincia }}</td>
-                            <td>{{ $user->municipio }}</td>
-                            <td>{{ $user->org_nome }}</td>
-                            <td><img src="{{ asset($user->imagem) }}" style="width: 70px; border-radius:0.35rem" alt=""></td>
+                            <td>{{ $ass->id_membro }}</td>
+                            <td>{{ $ass->membro }}</td>
+                            <td>{{ $ass->credencial }}</td>
+
                             <td>
                                 <div class="dropdown">
                                     <button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <span class="text-muted sr-only">Action</span>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="{{ route('admin.membro.edit.index',['id'=>$user->id]) }}">Editar</a>
-                                        <a class="dropdown-item" href="{{ route('admin.membro.delete',['id'=>$user->id])}}">Eliminar</a>
-                                        <a class="dropdown-item" href="{{ route('admin.membro.purge',['id'=>$user->id]) }}">Purgar</a>
+                                        <a class="dropdown-item" href="{{ route('admin.associado.edit.index',['id_membro'=>$ass->id_membro]) }}">Editar</a>
+                                        <a class="dropdown-item" href="{{ route('admin.associado.delete',['id_membro'=>$ass->id_membro])}}">Eliminar</a>
+                                        <a class="dropdown-item" href="{{ route('admin.associado.purge',['id_membro'=>$ass->id_membro]) }}">Purgar</a>
                                     </div>
                                 </div>
 
@@ -95,37 +77,37 @@
 </div>
 
 <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
-@if (session('membro.delete.success'))
+@if (session('associado.delete.success'))
     <script>
         Swal.fire(
-            'useranização Eliminada com sucesso!',
+            'associado Eliminado com sucesso!',
             '',
             'success'
         )
     </script>
 @endif
-@if (session('membro.delete.error'))
+@if (session('associado.delete.error'))
     <script>
         Swal.fire(
-            'Erro ao Eliminar useranização!',
+            'Erro ao Eliminar associado!',
             '',
             'error'
         )
     </script>
 @endif
-@if (session('membro.purge.success'))
+@if (session('associado.purge.success'))
     <script>
         Swal.fire(
-            'useranização Purgada com sucesso!',
+            'associado Purgada com sucesso!',
             '',
             'success'
         )
     </script>
 @endif
-@if (session('membro.purge.error'))
+@if (session('associado.purge.error'))
     <script>
         Swal.fire(
-            'Erro ao Purgar useranização!',
+            'Erro ao Purgar associado!',
             '',
             'error'
         )

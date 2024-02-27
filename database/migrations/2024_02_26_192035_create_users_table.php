@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('genero');
             $table->string('password');
             $table->unsignedBigInteger('it_id_org');
+            $table->string('imagem');
             $table->foreign('it_id_org')->references('id')->on('organizacoes')->onUptade('cascade')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();

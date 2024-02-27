@@ -41,7 +41,8 @@ class UserController extends Controller
                 'municipio' => 'required',
                 'genero' => 'required',
                 'password' => 'required',
-                'it_id_org' => 'required'
+                'it_id_org' => 'required',
+                'imagem' => 'required'
             ], [
                 'vc_pr_nome.required' => 'Campo obrigatório',
                 'vc_nome_meio.required' => 'Campo obrigatório',
@@ -53,9 +54,12 @@ class UserController extends Controller
                 'municipio.required' => 'Campo obrigatório',
                 'genero.required' => 'Campo obrigatório',
                 'password.required' => 'Campo obrigatório',
-                'it_id_org.required' => 'Campo obrigatório'
+                'it_id_org.required' => 'Campo obrigatório',
+                'imagem.required' => 'Campo obrigatório'
             ]);
 
+            if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+                $caminho = $this->carregar_imagem($request);
 
 
                 $user = User::create([
@@ -69,13 +73,17 @@ class UserController extends Controller
                     'municipio' => $request->municipio,
                     'genero' => $request->genero,
                     'password' => $request->password,
-                    'it_id_org' => $request->it_id_org
+                    'it_id_org' => $request->it_id_org,
+                    'imagem' =>$caminho
                 ]);
 
+            }
 
 
             return redirect()->back()->with('membro.create.success', 1);
         } catch (\Throwable $th) {
+
+
 
 
             return redirect()->back()->with('membro.create.error', 1);
@@ -103,7 +111,7 @@ class UserController extends Controller
 
         try {
 
-            $org=User::find($id);
+            $user=User::find($id);
 
             $request->validate([
                 'vc_pr_nome' => 'required',
@@ -116,7 +124,9 @@ class UserController extends Controller
                 'municipio' => 'required',
                 'genero' => 'required',
                 'password' => 'required',
-                'it_id_org' => 'required'
+                'it_id_org' => 'required',
+                'imagem' => 'required'
+
             ], [
                 'vc_pr_nome.required' => 'Campo obrigatório',
                 'vc_nome_meio.required' => 'Campo obrigatório',
@@ -128,8 +138,17 @@ class UserController extends Controller
                 'municipio.required' => 'Campo obrigatório',
                 'genero.required' => 'Campo obrigatório',
                 'password.required' => 'Campo obrigatório',
-                'it_id_org.required' => 'Campo obrigatório'
+                'it_id_org.required' => 'Campo obrigatório',
+                'imagem.required' => 'Campo obrigatório'
             ]);
+
+            if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+                $caminho= $this->carregar_imagem($request);
+
+                if (isset($user->imagem)) {
+                    $path = public_path($user->imagem);
+                    unlink($path);
+                }
 
 
                 $user=User::findOrFail($id)->update([
@@ -143,14 +162,17 @@ class UserController extends Controller
                     'municipio' => $request->municipio,
                     'genero' => $request->genero,
                     'password' => $request->password,
-                    'it_id_org' => $request->it_id_org
+                    'it_id_org' => $request->it_id_org,
+                    'imagem' =>$caminho
                 ]);
 
+            }
 
 
             return redirect()->back()->with('membro.update.success',1);
         } catch (\Throwable $th) {
             //throw $th;
+            dd($th);
             return redirect()->back()->with('membro.update.error',1);
         }
     }
@@ -182,6 +204,24 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with('membro.purge.error',1);
             //throw $th;
+        }
+    }
+
+    public function carregar_imagem(Request $request){
+        $name = uniqid(date('HisYmd'));
+        $associado = $request->file('imagem');
+
+        $extension = $request->imagem->extension();
+        $nameFile = "{$name}.{$extension}";
+        $destionationPath = public_path("images/membros");
+        $associado->move($destionationPath, $nameFile);
+
+        $caminho = "images/membros/" . $nameFile;
+
+        if (!$caminho) {
+            return redirect()->back()->with('error','Falha ao carregar imagem')->withInput();
+        } else {
+            return $caminho;
         }
     }
 

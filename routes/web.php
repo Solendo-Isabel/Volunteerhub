@@ -46,6 +46,16 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),'verified',
                 Route::get('purge/{id}', ['as' => 'admin.membro.purge', 'uses'=> 'UserController@purge']);
             });
 
+
+            Route::prefix('associado')->group(function(){
+                Route::get('index', ['as' => 'admin.associado.index', 'uses'=> 'AssociadoController@index']);
+                Route::get('create', ['as' => 'admin.associado.create.index', 'uses'=> 'AssociadoController@create']);
+                Route::post('store', ['as' => 'admin.associado.store', 'uses'=> 'AssociadoController@store']);
+                Route::get('edit/{id_membro}', ['as' => 'admin.associado.edit.index', 'uses'=> 'AssociadoController@edit']);
+                Route::post('update/{id_membro}', ['as' => 'admin.associado.update', 'uses'=> 'AssociadoController@update']);
+                Route::get('delete/{id_membro}', ['as' => 'admin.associado.delete', 'uses'=> 'AssociadoController@delete']);
+                Route::get('purge/{id_membro}', ['as' => 'admin.associado.purge', 'uses'=> 'AssociadoController@purge']);
+            });
         });
 
 });
