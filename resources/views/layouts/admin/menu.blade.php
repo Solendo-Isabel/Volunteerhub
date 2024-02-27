@@ -29,6 +29,14 @@
                     <a href="{{ route('admin.membro.create.index') }}" class="dropdown-item">Criar</a>
                     <a href="{{ route('admin.membro.index') }}" class="dropdown-item">Listar</a>
                 </div>
+                <li class="nav-item dropdown">
+                    <form action="/logout" method="POST">
+                                  @csrf
+                                  <a href="/logout" class="btn btn-primary
+                                  " onclick="event.preventDefault();
+                                  this.closest('form').submit();">LogOut</a>
+                              </form>
+                </li>
             </div>
         </div>
     </nav>

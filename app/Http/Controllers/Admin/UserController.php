@@ -40,7 +40,7 @@ class UserController extends Controller
                 'provincia' => 'required',
                 'municipio' => 'required',
                 'genero' => 'required',
-                'senha' => 'required',
+                'password' => 'required',
                 'it_id_org' => 'required'
             ], [
                 'vc_pr_nome.required' => 'Campo obrigatório',
@@ -52,7 +52,7 @@ class UserController extends Controller
                 'provincia.required' => 'Campo obrigatório',
                 'municipio.required' => 'Campo obrigatório',
                 'genero.required' => 'Campo obrigatório',
-                'senha.required' => 'Campo obrigatório',
+                'password.required' => 'Campo obrigatório',
                 'it_id_org.required' => 'Campo obrigatório'
             ]);
 
@@ -68,7 +68,7 @@ class UserController extends Controller
                     'provincia' => $request->provincia,
                     'municipio' => $request->municipio,
                     'genero' => $request->genero,
-                    'senha' => $request->senha,
+                    'password' => $request->password,
                     'it_id_org' => $request->it_id_org
                 ]);
 
@@ -115,7 +115,7 @@ class UserController extends Controller
                 'provincia' => 'required',
                 'municipio' => 'required',
                 'genero' => 'required',
-                'senha' => 'required',
+                'password' => 'required',
                 'it_id_org' => 'required'
             ], [
                 'vc_pr_nome.required' => 'Campo obrigatório',
@@ -127,7 +127,7 @@ class UserController extends Controller
                 'provincia.required' => 'Campo obrigatório',
                 'municipio.required' => 'Campo obrigatório',
                 'genero.required' => 'Campo obrigatório',
-                'senha.required' => 'Campo obrigatório',
+                'password.required' => 'Campo obrigatório',
                 'it_id_org.required' => 'Campo obrigatório'
             ]);
 
@@ -142,7 +142,7 @@ class UserController extends Controller
                     'provincia' => $request->provincia,
                     'municipio' => $request->municipio,
                     'genero' => $request->genero,
-                    'senha' => $request->senha,
+                    'password' => $request->password,
                     'it_id_org' => $request->it_id_org
                 ]);
 

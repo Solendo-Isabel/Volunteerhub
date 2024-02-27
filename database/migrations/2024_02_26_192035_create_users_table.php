@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('provincia');
             $table->string('municipio');
             $table->string('genero');
-            $table->string('senha');
+            $table->string('password');
             $table->unsignedBigInteger('it_id_org');
             $table->foreign('it_id_org')->references('id')->on('organizacoes')->onUptade('cascade')->onDelete('cascade');
             $table->rememberToken();

@@ -117,11 +117,11 @@
         </div>
 
         <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="senha" name="senha"
-                placeholder="" value="{{ isset($user->senha) ? $user->senha : old('senha')}}">
-            <label for="senha">Senha</label>
+            <input type="password" class="form-control" id="password" name="password"
+                placeholder="" value="{{ isset($user->password) ? $user->password : old('password')}}">
+            <label for="password">Senha</label>
 
-            @error('senha')
+            @error('password')
         <span class="invalid-feedbackj" role="alert">
             <strong>{{ $message }}</strong>
         </span>
