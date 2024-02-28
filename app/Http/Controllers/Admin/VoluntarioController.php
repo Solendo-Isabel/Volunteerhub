@@ -5,21 +5,21 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Associado;
+use App\Models\Voluntario;
 
-class AssociadoController extends Controller
+class VoluntarioController extends Controller
 {
     public function index(){
-        $data['associados']=Associado::join('users','users.id','=','associados.id')
-        ->select('associados.*','users.vc_pr_nome as membro')->get();
+        $data['voluntarios']=Voluntario::join('users','users.id','=','voluntarios.id')
+        ->select('voluntarios.*','users.vc_pr_nome as membro')->get();
 
         $data['users']=User::all();
-        return view('admin.associado.index',$data);
+        return view('admin.voluntario.index',$data);
     }
 
     public function create(){
         $response['users']=User::all();
-        return view('admin.associado.create.index',$response);
+        return view('admin.voluntario.create.index',$response);
     }
 
     /**
@@ -32,26 +32,23 @@ class AssociadoController extends Controller
         try {
             $request->validate([
                 'id' => 'required',
-                'credencial' => 'required'
             ], [
                 'id.required' => 'Campo obrigatório',
-                'credencial.required' => 'Campo obrigatório'
             ]);
 
 
 
-                $associado = Associado::create([
+                $voluntario = Voluntario::create([
                     'id' => $request->id,
-                    'credencial' => $request->credencial
                 ]);
 
 
 
-            return redirect()->back()->with('associado.create.success', 1);
+            return redirect()->back()->with('voluntario.create.success', 1);
         } catch (\Throwable $th) {
 
 
-            return redirect()->back()->with('associado.create.error', 1);
+            return redirect()->back()->with('voluntario.create.error', 1);
         }
     }
 
@@ -61,9 +58,9 @@ class AssociadoController extends Controller
     */
 
     public function edit($id){
-        $response['associado']=Associado::find($id);
+        $response['voluntario']=Voluntario::find($id);
         $response['users']=User::all();
-        return view('admin.associado.edit.index',$response);
+        return view('admin.voluntario.edit.index',$response);
     }
 
     /**
@@ -76,29 +73,26 @@ class AssociadoController extends Controller
 
         try {
 
-            $associado=Associado::findOrFail($id);
+            $voluntario=Voluntario::findOrFail($id);
 
             $request->validate([
                 'id' => 'required',
-                'credencial' => 'required'
             ], [
                 'id.required' => 'Campo obrigatório',
-                'credencial.required' => 'Campo obrigatório'
             ]);
 
 
-            Associado::findOrFail($id)->update([
+            Voluntario::findOrFail($id)->update([
                     'id' => $request->id,
-                    'credencial' => $request->credencial
                 ]);
 
 
 
-            return redirect()->back()->with('associado.update.success',1);
+            return redirect()->back()->with('voluntario.update.success',1);
         } catch (\Throwable $th) {
             //throw $th;
             dd($th);
-            return redirect()->back()->with('associado.update.error',1);
+            return redirect()->back()->with('voluntario.update.error',1);
         }
     }
 
@@ -109,11 +103,11 @@ class AssociadoController extends Controller
 
     public function delete($id){
         try {
-            $associado=Associado::findOrFail($id)->delete();
+            $voluntario=Voluntario::findOrFail($id)->delete();
 
-            return redirect()->back()->with('associado.delete.success',1);
+            return redirect()->back()->with('voluntario.delete.success',1);
         } catch (\Throwable $th) {
-            return redirect()->back()->with('associado.delete.error',1);
+            return redirect()->back()->with('voluntario.delete.error',1);
             //throw $th;
         }
 
@@ -121,11 +115,11 @@ class AssociadoController extends Controller
 
     public function purge($id){
         try {
-            $associado=Associado::findOrFail($id)->forceDelete();
+            $voluntario=Voluntario::findOrFail($id)->forceDelete();
 
-            return redirect()->back()->with('associado.purge.success',1);
+            return redirect()->back()->with('voluntario.purge.success',1);
         } catch (\Throwable $th) {
-            return redirect()->back()->with('associado.purge.error',1);
+            return redirect()->back()->with('voluntario.purge.error',1);
             //throw $th;
         }
     }

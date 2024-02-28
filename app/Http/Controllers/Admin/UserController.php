@@ -85,7 +85,6 @@ class UserController extends Controller
 
 
 
-
             return redirect()->back()->with('membro.create.error', 1);
         }
     }

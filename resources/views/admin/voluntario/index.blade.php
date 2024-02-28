@@ -1,5 +1,5 @@
 @extends('layouts.admin.body')
-@section('titulo','Listar Associados')
+@section('titulo','Listar voluntarios')
 
 @section('conteudo')
 
@@ -23,24 +23,22 @@
         </div>
       </form>
     <div class="bg-secondary rounded h-100 p-4">
-        <h6 class="mb-4">Associados</h6>
+        <h6 class="mb-4">voluntarios</h6>
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nome</th>
-                        <th scope="col">Credencial</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach ($associados as $ass)
+                    @foreach ($voluntarios as $vol)
                         <tr>
-                            <td>{{ $ass->id }}</td>
-                            <td>{{ $ass->membro }}</td>
-                            <td>{{ $ass->credencial }}</td>
+                            <td>{{ $vol->id }}</td>
+                            <td>{{ $vol->membro }}</td>
 
                             <td>
                                 <div class="dropdown">
@@ -48,9 +46,8 @@
                                         <span class="text-muted sr-only">Action</span>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="{{ route('admin.associado.edit.index',['id'=>$ass->id]) }}">Editar</a>
-                                        <a class="dropdown-item" href="{{ route('admin.associado.delete',['id'=>$ass->id])}}">Eliminar</a>
-                                        <a class="dropdown-item" href="{{ route('admin.associado.purge',['id'=>$ass->id]) }}">Purgar</a>
+                                        <a class="dropdown-item" href="{{ route('admin.voluntario.delete',['id'=>$vol->id])}}">Eliminar</a>
+                                        <a class="dropdown-item" href="{{ route('admin.voluntario.purge',['id'=>$vol->id]) }}">Purgar</a>
                                     </div>
                                 </div>
 
@@ -77,37 +74,37 @@
 </div>
 
 <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
-@if (session('associado.delete.success'))
+@if (session('voluntario.delete.success'))
     <script>
         Swal.fire(
-            'associado Eliminado com sucesso!',
+            'voluntario Eliminado com sucesso!',
             '',
             'success'
         )
     </script>
 @endif
-@if (session('associado.delete.error'))
+@if (session('voluntario.delete.error'))
     <script>
         Swal.fire(
-            'Erro ao Eliminar associado!',
+            'Erro ao Eliminar voluntario!',
             '',
             'error'
         )
     </script>
 @endif
-@if (session('associado.purge.success'))
+@if (session('voluntario.purge.success'))
     <script>
         Swal.fire(
-            'associado Purgada com sucesso!',
+            'voluntario Purgada com sucesso!',
             '',
             'success'
         )
     </script>
 @endif
-@if (session('associado.purge.error'))
+@if (session('voluntario.purge.error'))
     <script>
         Swal.fire(
-            'Erro ao Purgar associado!',
+            'Erro ao Purgar voluntario!',
             '',
             'error'
         )
