@@ -12,11 +12,9 @@ class Associado extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'id_membro',
+        'id',
         'credencial'
     ];
 
     protected $table = 'associados';
-
-    protected $primaryKey = 'id_membro';
 }

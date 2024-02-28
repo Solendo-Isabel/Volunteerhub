@@ -10,8 +10,8 @@ use App\Models\Associado;
 class AssociadoController extends Controller
 {
     public function index(){
-        $data['associados']=Associado::join('users','users.id','=','associados.id_membro')
-        ->select('associados.*','users.vc_pr_nome as membro')->get();
+        $data['associados']=Associado::join('users','users.id','=','associados.id')
+        ->select('associados.*','users.vc_pr_nome as nome1','users.vc_nome_meio as nome2','users.vc_ult_nome as nome3')->get();
 
         $data['users']=User::all();
         return view('admin.associado.index',$data);
@@ -31,17 +31,15 @@ class AssociadoController extends Controller
     {
         try {
             $request->validate([
-                'id_membro' => 'required',
+                'id' => 'required',
                 'credencial' => 'required'
             ], [
-                'id_membro.required' => 'Campo obrigatório',
+                'id.required' => 'Campo obrigatório',
                 'credencial.required' => 'Campo obrigatório'
             ]);
 
-
-
                 $associado = Associado::create([
-                    'id_membro' => $request->id_membro,
+                    'id' => $request->id,
                     'credencial' => $request->credencial
                 ]);
 
@@ -50,45 +48,44 @@ class AssociadoController extends Controller
             return redirect()->back()->with('associado.create.success', 1);
         } catch (\Throwable $th) {
 
-
             return redirect()->back()->with('associado.create.error', 1);
         }
     }
 
     /**
-     * @param int $id_membro
+     * @param int $id
      * @return Illuminate\Http\Response
     */
 
-    public function edit($id_membro){
-        $response['associado']=Associado::where('id_membro',$id_membro)->first();
+    public function edit($id){
+        $response['associado']=Associado::find($id);
         $response['users']=User::all();
         return view('admin.associado.edit.index',$response);
     }
 
     /**
      * @param Illuminate\Http\Request $request
-     * @param int $id_membro
+     * @param int $id
      * @return Illuminate\Http\Response
     */
 
-    public function update(Request $request , $id_membro){
+    public function update(Request $request , $id){
 
         try {
 
-            $associado=Associado::where('id_membro',$id_membro)->firstOrFail();
+            $associado=Associado::findOrFail($id);
 
             $request->validate([
-                'id_membro' => 'required',
+                'id' => 'required',
                 'credencial' => 'required'
             ], [
-                'id_membro.required' => 'Campo obrigatório',
+                'id.required' => 'Campo obrigatório',
                 'credencial.required' => 'Campo obrigatório'
             ]);
 
 
-                $associado->update([
-                    'id_membro' => $request->id_membro,
+            Associado::findOrFail($id)->update([
+                    'id' => $request->id,
                     'credencial' => $request->credencial
                 ]);
 
@@ -97,20 +94,18 @@ class AssociadoController extends Controller
             return redirect()->back()->with('associado.update.success',1);
         } catch (\Throwable $th) {
             //throw $th;
-            dd($th);
             return redirect()->back()->with('associado.update.error',1);
         }
     }
 
     /**
-     * @param int $id_membro
+     * @param int $id
      * @return Illuminate\Http\Response
     */
 
-    public function delete($id_membro){
+    public function delete($id){
         try {
-            $associado=Associado::where('id_membro',$id_membro)->firstOrFail();
-            $associado->delete();
+            $associado=Associado::findOrFail($id)->delete();
 
             return redirect()->back()->with('associado.delete.success',1);
         } catch (\Throwable $th) {
@@ -120,10 +115,9 @@ class AssociadoController extends Controller
 
     }
 
-    public function purge($id_membro){
+    public function purge($id){
         try {
-            $associado=Associado::where('id_membro',$id_membro)->firstOrFail();
-            $associado->forceDelete();
+            $associado=Associado::findOrFail($id)->forceDelete();
 
             return redirect()->back()->with('associado.purge.success',1);
         } catch (\Throwable $th) {

@@ -29,13 +29,22 @@
                     <a href="{{ route('admin.membro.create.index') }}" class="dropdown-item">Criar</a>
                     <a href="{{ route('admin.membro.index') }}" class="dropdown-item">Listar</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Associado</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Associados</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ route('admin.associado.create.index') }}" class="dropdown-item">Criar</a>
                             <a href="{{ route('admin.associado.index') }}" class="dropdown-item">Listar</a>
                         </div>
+                         <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Voluntários</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('admin.voluntario.create.index') }}" class="dropdown-item">Criar</a>
+                            <a href="{{ route('admin.voluntario.index') }}" class="dropdown-item">Listar</a>
+                        </div>
                 </div>
-                <li class="nav-item dropdown mt-3">
+               
+            </div>
+        </div>
+         <li class="nav-item dropdown mt-3">
                     <form action="/logout" method="POST">
                                   @csrf
                                   <a href="/logout"  class="btn btn-primary
@@ -43,8 +52,6 @@
                                   this.closest('form').submit();">LogOut</a>
                               </form>
                 </li>
-            </div>
-        </div>
     </nav>
 </div>
 <!-- Sidebar End -->

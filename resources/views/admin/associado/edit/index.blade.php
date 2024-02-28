@@ -5,7 +5,7 @@
 
     <h3 class="p-4 pb-0" style="color:#312f2f">Editar Associado</h3>
 
-    <form action="{{ route('admin.associado.update',['id_membro'=>$associado->id_membro]) }}" method="post" enctype="multipart/form-data" class="mt-3 mb-5">
+    <form action="{{ route('admin.associado.update',['id'=>$associado->id]) }}" method="post" enctype="multipart/form-data" class="mt-3 mb-5">
         @csrf
         <div class="card-body">
             @include('_forms.AssociadoForm.index')

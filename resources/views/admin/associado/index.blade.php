@@ -38,8 +38,8 @@
 
                     @foreach ($associados as $ass)
                         <tr>
-                            <td>{{ $ass->id_membro }}</td>
-                            <td>{{ $ass->membro }}</td>
+                            <td>{{ $ass->id }}</td>
+                             <td>{{ $ass->nome1 }} {{ $ass->nome2 }} {{ $ass->nome3 }}</td>
                             <td>{{ $ass->credencial }}</td>
 
                             <td>
@@ -48,9 +48,9 @@
                                         <span class="text-muted sr-only">Action</span>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="{{ route('admin.associado.edit.index',['id_membro'=>$ass->id_membro]) }}">Editar</a>
-                                        <a class="dropdown-item" href="{{ route('admin.associado.delete',['id_membro'=>$ass->id_membro])}}">Eliminar</a>
-                                        <a class="dropdown-item" href="{{ route('admin.associado.purge',['id_membro'=>$ass->id_membro]) }}">Purgar</a>
+                                        <a class="dropdown-item" href="{{ route('admin.associado.edit.index',['id'=>$ass->id]) }}">Editar</a>
+                                        <a class="dropdown-item" href="{{ route('admin.associado.delete',['id'=>$ass->id])}}">Eliminar</a>
+                                        <a class="dropdown-item" href="{{ route('admin.associado.purge',['id'=>$ass->id]) }}">Purgar</a>
                                     </div>
                                 </div>
 

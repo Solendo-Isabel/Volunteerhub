@@ -5,18 +5,18 @@
         <h6 class="mb-4">Associados</h6>
         <div class="form-floating mb-3">
 
-            <label for="id_membro">Membro</label> <br>
-            <select name="id_membro" id="id_membro" class="form-control select2" required>
-                @if (!isset($associado->id_membro))
+            <label for="id">Membro</label> <br>
+            <select name="id" id="id" class="form-control select2" required>
+                @if (!isset($associado->id))
                     <option value=""  disabled selected>Selecione um ítem</option>
                 @endif
 
                 @foreach ($users as $user)
-                    <option value="{{ $user->id }}"  {{ isset($associado) ? ($associado->id_membro == $user->id ? 'selected' : ""):""}}>{{ $user->vc_pr_nome }} {{ $user->vc_nome_meio }} {{ $user->vc_ult_nome }}</option>
+                    <option value="{{ $user->id }}"  {{ isset($associado) ? ($associado->id == $user->id ? 'selected' : ""):""}}>{{ $user->vc_pr_nome }} {{ $user->vc_nome_meio }} {{ $user->vc_ult_nome }}</option>
                 @endforeach
             </select>
 
-            @error('id_membro')
+            @error('id')
         <span class="invalid-feedbackj" role="alert">
             <strong>{{ $message }}</strong>
         </span>
