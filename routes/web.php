@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.dashboard');
+    return view('site.index');
 });
+
 
 Route::middleware(['auth'])->group(function(){
 
@@ -24,7 +25,14 @@ Route::middleware(['auth'])->group(function(){
 
 Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),'verified',
 ])->group(function () {
+
+
+
     Route::/*middleware(['auth'])->*/namespace('App\Http\Controllers\Admin')->group(function(){
+
+        Route::get('/dash', function () {
+            return view('admin.dashboard');});
+
 
         Route::prefix('organizacao')->group(function(){
                 Route::get('index', ['as' => 'admin.organizacao.index', 'uses'=> 'OrganizacaoController@index']);
