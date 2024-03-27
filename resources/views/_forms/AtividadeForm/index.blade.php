@@ -38,7 +38,6 @@
                 @endif
 
                 <option value= {{ isset($user) ?  $user->estado  'selected' : "" }}>Masculino</option>
-    
             </select>
 
             @error('estado')
