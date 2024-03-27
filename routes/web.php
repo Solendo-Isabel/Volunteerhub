@@ -74,6 +74,26 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),'verified',
                 Route::get('delete/{id}', ['as' => 'admin.voluntario.delete', 'uses'=> 'VoluntarioController@delete']);
                 Route::get('purge/{id}', ['as' => 'admin.voluntario.purge', 'uses'=> 'VoluntarioController@purge']);
             });
+
+            Route::prefix('atividade')->group(function(){
+                Route::get('index', ['as' => 'admin.atividade.index', 'uses'=> 'AtividadeController@index']);
+                Route::get('create', ['as' => 'admin.atividade.create.index', 'uses'=> 'AtividadeController@create']);
+                Route::post('store', ['as' => 'admin.atividade.store', 'uses'=> 'AtividadeController@store']);
+                Route::get('edit/{id}', ['as' => 'admin.atividade.edit.index', 'uses'=> 'AtividadeController@edit']);
+                Route::post('update/{id}', ['as' => 'admin.atividade.update', 'uses'=> 'AtividadeController@update']);
+                Route::get('delete/{id}', ['as' => 'admin.atividade.delete', 'uses'=> 'AtividadeController@delete']);
+                Route::get('purge/{id}', ['as' => 'admin.atividade.purge', 'uses'=> 'AtividadeController@purge']);
+            });
+
+            Route::prefix('act_vol')->group(function(){
+                Route::get('index', ['as' => 'admin.act_vol.index', 'uses'=> 'AtividadeVoluntarioController@index']);
+                Route::get('create', ['as' => 'admin.act_vol.create.index', 'uses'=> 'AtividadeVoluntarioController@create']);
+                Route::post('store', ['as' => 'admin.act_vol.store', 'uses'=> 'AtividadeVoluntarioController@store']);
+                Route::get('edit/{id}', ['as' => 'admin.act_vol.edit.index', 'uses'=> 'AtividadeVoluntarioController@edit']);
+                Route::post('update/{id}', ['as' => 'admin.act_vol.update', 'uses'=> 'AtividadeVoluntarioController@update']);
+                Route::get('delete/{id}', ['as' => 'admin.act_vol.delete', 'uses'=> 'AtividadeVoluntarioController@delete']);
+                Route::get('purge/{id}', ['as' => 'admin.act_vol.purge', 'uses'=> 'AtividadeVoluntarioController@purge']);
+            });
         });
 
 });

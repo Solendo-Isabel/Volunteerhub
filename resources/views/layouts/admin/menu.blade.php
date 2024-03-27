@@ -43,6 +43,21 @@
                     </div>
                </div>
 
+
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Actividades</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="{{ route('admin.atividade.create.index') }}" class="dropdown-item">Criar</a>
+                    <a href="{{ route('admin.atividade.index') }}" class="dropdown-item">Listar</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Actividades & <br> Voluntários</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="{{ route('admin.act_vol.create.index') }}" class="dropdown-item">Criar</a>
+                    <a href="{{ route('admin.act_vol.index') }}" class="dropdown-item">Listar</a>
+                </div>
             </div>
         </div>
         <li class="nav-item dropdown mt-3">
