@@ -44,7 +44,7 @@
                         <tr>
                             <td>{{ $act->id }}</td>
                             <td>{{ $act->titulo }}</td>
-                            <td>{{ $act->descricao }}</td>
+                            <td>{!! $act->descricao !!}</td>
                             @if ($act->estado == "R")
                                 <td>Realizado</td>
                             @endif

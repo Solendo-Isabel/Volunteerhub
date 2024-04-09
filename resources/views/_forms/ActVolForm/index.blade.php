@@ -12,7 +12,7 @@
                 @endif
 
                 @foreach ($atividades as $atividade)
-                    <option value="{{ $atividade->id }}"  {{ isset($act_vol) ? ($act_vol->id_atividade == $voluntario->id ? 'selected' : ""):""}}>{{ $atividade->titulo }}</option>
+                    <option value="{{ $atividade->id }}"  {{ isset($act_vol) ? ($act_vol->id_atividade == $atividade->id ? 'selected' : ""):""}}>{{ $atividade->titulo }}</option>
                 @endforeach
             </select>
 
@@ -32,7 +32,7 @@
                 @endif
 
                 @foreach ($voluntarios as $voluntario)
-                    <option value="{{ $voluntario->id_voluntario }}"  {{ isset($act_vol) ? ($act_vol->id_voluntario == $voluntario->id ? 'selected' : ""):""}}>{{ $voluntario->id }}</option>
+                    <option value="{{ $voluntario->id }}"  {{ isset($act_vol) ? ($act_vol->id_voluntario == $voluntario->id ? 'selected' : ""):""}}>{{ $voluntario->voluntario }} {{ $voluntario->voluntario2 }} {{ $voluntario->voluntario3 }}</option>
                 @endforeach
             </select>
 

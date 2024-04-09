@@ -175,10 +175,70 @@
     <script src="{{asset('painel/js/apexcharts.custom.js')}}"></script>
     <script src="{{asset('painel/js/apps.js')}}"></script>
 
+
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+
+    <script src="{{ asset('assets/dist/trumbowyg.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('assets/dist/langs/pt_br.min.js') }}"></script>
+
+    <script src="{{ asset('assets/dist/plugins/emoji/trumbowyg.emoji.min.js') }}"></script>
+
+
+    <script>
+
+    $('#editor').trumbowyg({
+        lang: 'pt_br',
+        btns: [
+            ['viewHTML'],
+            ['undo', 'redo'], // Only supported in Blink browsers
+            ['formatting'],
+            ['strong', 'em', 'del'],
+            ['superscript', 'subscript'],
+            ['link'],
+            ['insertImage'],
+            ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+            ['unorderedList', 'orderedList'],
+            ['horizontalRule'],
+            ['removeformat'],
+            ['emoji'],
+            ['fullscreen']
+        ],
+        autogrow: true
+    });
+
+    $('#desc_estado').trumbowyg({
+        lang: 'pt_br',
+        btns: [
+            ['viewHTML'],
+            ['undo', 'redo'], // Only supported in Blink browsers
+            ['formatting'],
+            ['strong', 'em', 'del'],
+            ['superscript', 'subscript'],
+            ['link'],
+            ['insertImage'],
+            ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+            ['unorderedList', 'orderedList'],
+            ['horizontalRule'],
+            ['removeformat'],
+            ['emoji'],
+            ['fullscreen']
+        ],
+        autogrow: true
+    });
+
+</script>
+
+
+
+
+
+
     <!-- Template Javascript -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 </body>
 
 </html>

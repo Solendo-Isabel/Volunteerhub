@@ -1,6 +1,6 @@
-<div class="row">
+ <div class="row">
 
-<div class="col-sm-12 col-xl-10 offset-md-1">
+ <div class="col-sm-12 col-xl-10 offset-md-1">
     <div class="bg-secondary rounded h-100 p-4">
         <h6 class="mb-4">Atividades</h6>
         <div class="form-floating mb-3">
@@ -17,10 +17,15 @@
         @enderror
         </div>
 
+        <p class="mt-5">Descrição da Atividade</p>
+
         <div class="form-floating mb-3">
-            <textarea class="form-control" placeholder="Descreva aqui" name="descricao"
-                id="descricao" style="height: 150px;">{{ isset($atividade->descricao) ? $atividade->descricao : old('descricao')}}</textarea>
-            <label for="descricao">Descrição</label>
+            <div id="container">
+                <textarea class="form-control" id="editor" placeholder="Descreva aqui" name="descricao"
+                style="height: 150px;">{{ isset($atividade->descricao) ? $atividade->descricao : old('descricao')}}</textarea>
+            </div>
+
+
 
             @error('descricao')
         <span class="invalid-feedbackj" role="alert">
@@ -49,10 +54,14 @@
         @enderror
         </div>
 
+        <p class="mt-5">Descrição do Estado</p>
+
         <div class="form-floating mb-3">
-            <textarea class="form-control" placeholder="Descreva aqui" name="desc_estado"
-                id="desc_estado" style="height: 150px;">{{ isset($atividade->desc_estado) ? $atividade->desc_estado : old('desc_estado')}}</textarea>
-            <label for="desc_estado">Descrição do Estado</label>
+            <div id="container">
+                <textarea class="form-control" placeholder="Descreva aqui" id="desc_estado" rows="2"  name="desc_estado"
+            style="height: 150px !important;">{{ isset($atividade->desc_estado) ? $atividade->desc_estado : old('desc_estado')}}</textarea>
+        </div>
+
 
             @error('desc_estado')
         <span class="invalid-feedbackj" role="alert">
@@ -61,6 +70,8 @@
         @enderror
         </div>
 
+        <br>
+        <br>
         <div class="form-floating mb-3">
             <input type="date" class="form-control" id="data_inicio" name="data_inicio"
                 placeholder="" value="{{ isset($atividade->data_inicio) ? $atividade->data_inicio : old('data_inicio')}}">
@@ -73,6 +84,7 @@
         @enderror
         </div>
 
+        <br>
         <div class="form-floating mb-3">
             <input type="date" class="form-control" id="data_fim" name="data_fim"
                 placeholder="" value="{{ isset($atividade->data_fim) ? $atividade->data_fim : old('data_fim')}}">
@@ -88,14 +100,26 @@
 
 
     </div>
-</div>
+ </div>
 
-<style>
+    <style>
     .form-control{
         background: #fff !important;
         border-top: none;
         border-left: none;
         border-right: none;
-        border-bottom: solid 2px #cdcdcd
+        border-bottom: solid 2px #cdcdcd;
     }
-</style>
+
+    #container{
+        width: 100%;
+        margin: 0 auto;
+        height: 20vh;
+        margin-top: 20px;
+        overflow: hidden;
+        border-bottom: solid 2px #eee;
+    }
+
+
+    </style>
+
