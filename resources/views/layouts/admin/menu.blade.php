@@ -1,18 +1,23 @@
  <!-- Sidebar Start -->
  <div class="sidebar pb-3">
     <nav class="navbar bg-secondary navbar-dark" style="background: transparent !important">
-        <a href="index.html" class="navbar-brand mx-4 mb-3">
+        <a href="{{ url('/') }}" class="navbar-brand mx-4 mb-3">
         <img src="{{ asset('assets/logo/logo1.jpg') }}" style="width: 140px; border-radius:50%;" alt="">
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
             <div class="position-relative">
-                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px; margin-left:50px;">
-                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+
+                @if (isset(auth()->user()->imagem))
+                    <img class="rounded-circle" src="{{asset(Auth::User()->imagem)}}" alt="" style="width: 40px; height: 40px;">
+
+                @else
+                    <img class="rounded-circle" src="{{asset('assets/images/unknown.jpg')}}" alt="" style="width: 40px; height: 40px;">
+                @endif
+
             </div>
 
             <div class="">
-                <h6 class="mb-0">Jhon Doe</h6>
-                <span>Admin</span>
+                <h6 class="mb-0">{{ auth()->user()->vc_pr_nome }} {{ auth()->user()->vc_ult_nome }}</h6>
             </div>
         </div>
         <div class="navbar-nav w-100">
@@ -20,7 +25,7 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-building me-2"></i>Organização</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ route('admin.organizacao.create.index') }}" class="dropdown-item">Criar</a>
+                    <a href="s{{ route('admin.organizacao.create.index') }}" class="dropdown-item">Criar</a>
                     <a href="{{ route('admin.organizacao.index') }}" class="dropdown-item">Listar</a>
                 </div>
             </div>

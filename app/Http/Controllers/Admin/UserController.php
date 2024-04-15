@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Organizacao;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -48,7 +49,7 @@ class UserController extends Controller
                 'vc_nome_meio.required' => 'Campo obrigatório',
                 'vc_ult_nome.required' => 'Campo obrigatório',
                 'BI.required' => 'Campo obrigatório',
-                'telefone.required' => 'Campo obrigatório', // Adicionei 'required' aqui
+                'telefone.required' => 'Campo obrigatório',
                 'email.required' => 'Campo obrigatório',
                 'provincia.required' => 'Campo obrigatório',
                 'municipio.required' => 'Campo obrigatório',
@@ -72,7 +73,7 @@ class UserController extends Controller
                     'provincia' => $request->provincia,
                     'municipio' => $request->municipio,
                     'genero' => $request->genero,
-                    'password' => $request->password,
+                    'password' =>  Hash::make($request->password),
                     'it_id_org' => $request->it_id_org,
                     'imagem' =>$caminho
                 ]);
@@ -82,7 +83,7 @@ class UserController extends Controller
 
             return redirect()->back()->with('membro.create.success', 1);
         } catch (\Throwable $th) {
-
+            dd($th);
 
 
             return redirect()->back()->with('membro.create.error', 1);
@@ -160,7 +161,7 @@ class UserController extends Controller
                     'provincia' => $request->provincia,
                     'municipio' => $request->municipio,
                     'genero' => $request->genero,
-                    'password' => $request->password,
+                    'password' =>  Hash::make($request->password),
                     'it_id_org' => $request->it_id_org,
                     'imagem' =>$caminho
                 ]);
@@ -170,7 +171,7 @@ class UserController extends Controller
 
             return redirect()->back()->with('membro.update.success',1);
         } catch (\Throwable $th) {
-            //throw $th;
+
             dd($th);
             return redirect()->back()->with('membro.update.error',1);
         }
