@@ -4,22 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Organizacao;
 use App\Models\Atividade;
 
 class AtividadeController extends Controller
 {
     public function index(){
-        $data['atividades']=Atividade::join('organizacoes','organizacoes.id','=','atividades.it_id_org')
-        ->select('atividades.*','organizacoes.vc_nome as nome_org')->get();
+        $data['atividades'] = Atividade::all();
 
-        $data['organizacoes']=Organizacao::all();
         return view('admin.atividade.index',$data);
     }
 
     public function create(){
-        $response['organizacoes']=Organizacao::all();
-        return view('admin.atividade.create.index',$response);
+        return view('admin.atividade.create.index');
     }
 
     /**
@@ -34,28 +30,28 @@ class AtividadeController extends Controller
                 'titulo' => 'required',
                 'descricao' => 'required',
                 'estado' => 'required',
-                'desc_estado' => 'required',
-                'data_fim' => 'required',
                 'data_inicio' => 'required',
-                'it_id_org' => 'required'
+                'data_fim' => 'required',
+                'desc_estado' => 'required'
+
             ], [
                 'titulo.required' => 'Campo obrigatório',
                 'descricao.required' => 'Campo obrigatório',
                 'estado.required' => 'Campo obrigatório',
-                'desc_estado.required' => 'Campo obrigatório',
-                'data_fim.required' => 'Campo obrigatório',
                 'data_inicio.required' => 'Campo obrigatório',
-                'it_id_org.required' => 'Campo obrigatório'
+                'data_fim.required' => 'Campo obrigatório',
+                'desc_estado.required' => 'Campo obrigatório'
             ]);
 
+
+
                 $atividade = Atividade::create([
-                'titulo' => $request ->titulo,
-                'descricao' => $request ->descricao,
-                'estado' => $request ->estado,
-                'desc_estado' => $request ->desc_estado,
-                'data_fim' => $request ->data_fim,
-                'data_inicio' => $request ->data_inicio,
-                'it_id_org' => $request ->it_id_org
+                    'titulo' => $request->titulo,
+                    'descricao' => $request->descricao,
+                    'estado' => $request->estado,
+                    'data_inicio' => $request->data_inicio,
+                    'data_fim' => $request->data_fim,
+                    'desc_estado' => $request->desc_estado
                 ]);
 
 
@@ -74,7 +70,6 @@ class AtividadeController extends Controller
 
     public function edit($id){
         $response['atividade']=Atividade::find($id);
-        $response['organizacoes']=Organizacao::all();
         return view('admin.atividade.edit.index',$response);
     }
 
@@ -94,36 +89,35 @@ class AtividadeController extends Controller
                 'titulo' => 'required',
                 'descricao' => 'required',
                 'estado' => 'required',
-                'desc_estado' => 'required',
-                'data_fim' => 'required',
                 'data_inicio' => 'required',
-                'it_id_org' => 'required'
+                'data_fim' => 'required',
+                'desc_estado' => 'required'
+
             ], [
                 'titulo.required' => 'Campo obrigatório',
                 'descricao.required' => 'Campo obrigatório',
                 'estado.required' => 'Campo obrigatório',
-                'desc_estado.required' => 'Campo obrigatório',
-                'data_fim.required' => 'Campo obrigatório',
                 'data_inicio.required' => 'Campo obrigatório',
-                'it_id_org.required' => 'Campo obrigatório'
+                'data_fim.required' => 'Campo obrigatório',
+                'desc_estado.required' => 'Campo obrigatório'
             ]);
 
 
             Atividade::findOrFail($id)->update([
-                'titulo' => $request ->titulo,
-                'descricao' => $request ->descricao,
-                'estado' => $request ->estado,
-                'desc_estado' => $request ->desc_estado,
-                'data_fim' => $request ->data_fim,
-                'data_inicio' => $request ->data_inicio,
-                'it_id_org' => $request ->it_id_org
-                ]);
+                'titulo' => $request->titulo,
+                'descricao' => $request->descricao,
+                'estado' => $request->estado,
+                'data_inicio' => $request->data_inicio,
+                'data_fim' => $request->data_fim,
+                'desc_estado' => $request->desc_estado
+            ]);
 
 
 
             return redirect()->back()->with('atividade.update.success',1);
         } catch (\Throwable $th) {
             //throw $th;
+            dd($th);
             return redirect()->back()->with('atividade.update.error',1);
         }
     }

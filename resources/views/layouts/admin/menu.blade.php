@@ -34,6 +34,7 @@
                             <a href="{{ route('admin.associado.create.index') }}" class="dropdown-item">Criar</a>
                             <a href="{{ route('admin.associado.index') }}" class="dropdown-item">Listar</a>
                         </div>
+<<<<<<< HEAD
                          <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Voluntários</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -52,6 +53,42 @@
                                   this.closest('form').submit();">LogOut</a>
                               </form>
                 </li>
+=======
+                   </div>
+                   <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Voluntário</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="{{ route('admin.voluntario.create.index') }}" class="dropdown-item">Criar</a>
+                        <a href="{{ route('admin.voluntario.index') }}" class="dropdown-item">Listar</a>
+                    </div>
+               </div>
+
+
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Actividades</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="{{ route('admin.atividade.create.index') }}" class="dropdown-item">Criar</a>
+                    <a href="{{ route('admin.atividade.index') }}" class="dropdown-item">Listar</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Actividades & <br> Voluntários</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="{{ route('admin.act_vol.create.index') }}" class="dropdown-item">Criar</a>
+                    <a href="{{ route('admin.act_vol.index') }}" class="dropdown-item">Listar</a>
+                </div>
+            </div>
+        </div>
+        <li class="nav-item dropdown mt-3">
+            <form action="/logout" method="POST">
+                          @csrf
+                          <a href="/logout"  class="btn btn-primary
+                          "  style="width:80%;margin-left:5px;" onclick="event.preventDefault();
+                          this.closest('form').submit();">LogOut</a>
+                      </form>
+        </li>
+>>>>>>> cca9b14f604134edf58c9ee7b9923c3c59cbd9aa
     </nav>
 </div>
 <!-- Sidebar End -->

@@ -11,7 +11,7 @@ class VoluntarioController extends Controller
 {
     public function index(){
         $data['voluntarios']=Voluntario::join('users','users.id','=','voluntarios.id')
-        ->select('voluntarios.*','users.vc_pr_nome as nome1','users.vc_nome_meio as nome2','users.vc_ult_nome as nome3')->get();
+        ->select('voluntarios.*','users.vc_pr_nome as membro')->get();
 
         $data['users']=User::all();
         return view('admin.voluntario.index',$data);
@@ -33,15 +33,20 @@ class VoluntarioController extends Controller
             $request->validate([
                 'id' => 'required',
             ], [
-                'id.required' => 'Campo obrigatório'
+                'id.required' => 'Campo obrigatório',
             ]);
 
+
+
                 $voluntario = Voluntario::create([
-                    'id' => $request->id
+                    'id' => $request->id,
                 ]);
+
+
 
             return redirect()->back()->with('voluntario.create.success', 1);
         } catch (\Throwable $th) {
+
 
             return redirect()->back()->with('voluntario.create.error', 1);
         }
@@ -73,12 +78,12 @@ class VoluntarioController extends Controller
             $request->validate([
                 'id' => 'required',
             ], [
-                'id.required' => 'Campo obrigatório'
+                'id.required' => 'Campo obrigatório',
             ]);
 
 
             Voluntario::findOrFail($id)->update([
-                    'id' => $request->id
+                    'id' => $request->id,
                 ]);
 
 
@@ -86,6 +91,7 @@ class VoluntarioController extends Controller
             return redirect()->back()->with('voluntario.update.success',1);
         } catch (\Throwable $th) {
             //throw $th;
+            dd($th);
             return redirect()->back()->with('voluntario.update.error',1);
         }
     }

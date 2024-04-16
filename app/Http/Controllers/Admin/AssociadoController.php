@@ -11,7 +11,7 @@ class AssociadoController extends Controller
 {
     public function index(){
         $data['associados']=Associado::join('users','users.id','=','associados.id')
-        ->select('associados.*','users.vc_pr_nome as nome1','users.vc_nome_meio as nome2','users.vc_ult_nome as nome3')->get();
+        ->select('associados.*','users.vc_pr_nome as membro')->get();
 
         $data['users']=User::all();
         return view('admin.associado.index',$data);
