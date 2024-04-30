@@ -49,7 +49,20 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contacte-nos</a>
                     </div>
-                    <a href="{{ url('/dash') }}" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Painel</a>
+                    @if(!Auth::check())
+                        <span class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0" > <a href="{{ url('/register') }}">Registar</a> / <a href="{{ url('/login') }}">Entrar</a></span>
+                    @endif
+                    @if (Auth::check())
+                        <a href="{{ url('/dash') }}" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Painel</a>
+                    @endif
                 </div>
             </nav>
 
+<style>
+    span{
+        background: #fff !important;
+    }
+    span:hover{
+        background: blue !important;
+    }
+</style>
