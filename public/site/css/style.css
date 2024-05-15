@@ -1,4 +1,11 @@
 
+*/:root{
+    --bs-primary: #15B9D9;
+    --bs-white:#fff;
+}
+
+
+
 /*** Spinner Start ***/
 /*** Spinner ***/
 #spinner {
@@ -185,7 +192,7 @@
 
 @media (max-width: 576px) {
     .topbar {
-        display: none;    
+        display: none;
     }
 }
 /*** Topbar End ***/
@@ -297,7 +304,7 @@
         border-bottom: 1px solid rgba(255, 255, 255, .1);
         z-index: 999;
     }
-    
+
     .sticky-top.navbar-light {
         position: fixed;
         background: var(--bs-light) !important;
@@ -326,7 +333,7 @@
 }
 /*** Carousel Hero Header Start ***/
 .header-carousel {
-    position: relative; 
+    position: relative;
 }
 
 .header-carousel .owl-nav .owl-prev {
@@ -384,7 +391,7 @@
     .header-carousel .header-carousel-item .carousel-caption .carousel-caption-content {
         width: 95% !important;
     }
- 
+
 }
 
 .header-carousel .header-carousel-item,
@@ -431,7 +438,7 @@
 .header-carousel .header-carousel-item .carousel-caption .carousel-caption-content {
     position: relative;
     width: 75%;
-    
+
 }
 /*** Carousel Hero Header End ***/
 
@@ -477,7 +484,7 @@
     border-top-left-radius: 10px;
     transition: 0.5s;
     z-index: 5;
-    
+
 }
 
 .service .service-item:hover .service-img::before {
@@ -540,9 +547,9 @@
 
 .about .about-img .about-img-inner {
     position: absolute;
-    left: 0; 
-    bottom: 0; 
-    border: 10px solid; 
+    left: 0;
+    bottom: 0;
+    border: 10px solid;
     border-color: var(--bs-white) var(--bs-white) var(--bs-white) var(--bs-white);
     border-radius: 50%;
 
@@ -550,8 +557,8 @@
 
 .about .about-img .about-experience {
     position: absolute;
-    top: 125px; 
-    left: -125px; 
+    top: 125px;
+    left: -125px;
     transform: rotate(-90deg);
     background: transparent;
     color: var(--bs-primary);
@@ -650,7 +657,7 @@
     height: 44px;
     border-radius: 50%;
     transition: 0.5s;
-    
+
 
 }
 
@@ -798,7 +805,7 @@
 
 /*** testimonial Start ***/
 .testimonial {
-    background: linear-gradient(rgba(21, 185, 217, 0.9), rgba(21, 185, 217, 0.9)), url(../img/carousel-1.jpg);
+    background: linear-gradient(rgba(21, 185, 217, 0.9), rgba(21, 185, 217, 0.9)), url(../img/criancas.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -877,7 +884,7 @@
         margin-top: -190px;
         margin-right: 40px;
     }
-    
+
 }
 
 .testimonial-carousel .owl-dots {
