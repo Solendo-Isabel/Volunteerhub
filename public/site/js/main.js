@@ -10,8 +10,8 @@
         }, 1);
     };
     spinner(0);
-    
-    
+
+
     // Initiate the wowjs
     new WOW().init();
 
@@ -36,8 +36,8 @@
         loop: true,
         nav : true,
         navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
+            '<i class="fa fa-arrow-left"></i>',
+            '<i class="fa fa-arrow-right"></i>'
         ],
     });
 
@@ -52,8 +52,8 @@
         margin: 25,
         nav : true,
         navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
+            '<i class="fa fa-arrow-left"></i>',
+            '<i class="fa fa-arrow-right"></i>'
         ]
     });
 
@@ -109,8 +109,8 @@
         }
     });
 
-    
-    
+
+
    // Back to top button
    $(window).scroll(function () {
     if ($(this).scrollTop() > 300) {

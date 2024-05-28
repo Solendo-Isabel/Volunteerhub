@@ -4,6 +4,7 @@
 @section('conteudo')
 
 <div class="col-11 m-5">
+
     <form class="form">
         <div class="form-row">
           <div class="form-group col-auto mr-auto">
@@ -24,7 +25,9 @@
       </form>
     <div class="bg-secondary rounded h-100 p-4">
         <h6 class="mb-4">Responsive Table</h6>
+
         <div class="table-responsive">
+
             <table class="table">
                 <thead>
                     <tr>
@@ -51,13 +54,34 @@
                                         <span class="text-muted sr-only">Action</span>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="{{ route('admin.organizacao.edit.index',['id'=>$org->id]) }}">Editar</a>
+                                        <a class="dropdown-item"href="#" data-toggle="modal" data-target="#ModalEdit{{$org->id}}">Editar</a>
                                         <a class="dropdown-item" href="{{ route('admin.organizacao.delete',['id'=>$org->id])}}">Eliminar</a>
                                         <a class="dropdown-item" href="{{ route('admin.organizacao.purge',['id'=>$org->id]) }}">Purgar</a>
                                     </div>
                                 </div>
 
                             </td>
+                            <div class="text-left modal fade" id="ModalEdit{{$org->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">{{ __('Editar Organização') }}</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('admin.membro.update', ['id' => $org->id]) }}" method="post" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="card-body">
+                                                    @include('_forms.OrgForm.index')
+                                                    <button type="submit" class="btn btn-primary w-md">Actualizar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </tr>
 
 
@@ -77,7 +101,34 @@
               </nav>
         </div>
     </div>
+
+    <button class="float-right ml-3 btn mt-3 btn-primary"
+                      class="btn botao" data-toggle="modal" data-target="#ModalCreate"
+                      type="button">Adicionar +</button>
 </div>
+
+<div class="text-left modal fade" id="ModalCreate" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ __('Adicionar Organização') }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('admin.organizacao.store')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
+                        {{ $org = null }}
+                        @include('_forms.OrgForm.index')
+                        <button type="submit" class="btn btn-primary w-md">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
 
 <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
 @if (session('organizacao.delete.success'))

@@ -1,16 +1,17 @@
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+<div class="min-h-screen sm:pt-0 bg-gray-100">
     <div>
 
     </div>
 
-    <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+    <div class="w-full shadow p-5">
         {{ $slot }}
     </div>
 </div>
 
 <style>
     .min-h-screen{
-        background: url("{{ asset('assets/images/login.jpg') }}");
+        background:linear-gradient(rgb(173, 1, 173), #1664eb );
         background-size: cover;
         height: 100vh;
         display: grid;

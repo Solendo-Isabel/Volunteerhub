@@ -79,13 +79,13 @@
                             <div class="buttomb mt-5" style="position: relative">
                                 <p style="position: absolute; bottom:0; left:30px;">Estado da atividade:
                                     @if ($act->estado == "NR")
-                                        <button class="btn" style="background: linear-gradient(red,rgb(255, 83, 83)); border-radius:none; color:#fff; cursor: none">Não Realizado</button>
+                                    <span class="" style="">Não Realizado</span>
                                     @endif
                                     @if ($act->estado == "P")
-                                        <button class="btn" style="background: linear-gradient(rgb(193, 193, 1),rgb(248, 248, 89)); border-radius:none; color:#fff; cursor: none">No Processo</button>
+                                    <span class="" style="">No Processo</span>
                                     @endif
                                     @if ($act->estado == "R")
-                                        <button class="btn" style="background: linear-gradient(lightgreen,rgb(57, 165, 57)); border-radius:none; color:#fff; cursor: none">Realizado</button>
+                                    <span class="" style="">Realizado</span>
                                     @endif
 
                                     </p>
@@ -287,8 +287,38 @@
                                     <p class="mb-0 text-muted"><i class="fa fa-calendar-alt text-primary"></i> Término {{ $geral->data_fim}}</p>
                                 </div>
                                 <a href="#" class="h4">{{ $geral->titulo }}</a>
-                                <p class="my-4">{!! $geral->descricao !!}</p>
-                                <a href="#" class="btn btn-primary rounded-pill text-white py-2 px-4 mb-1">Read More</a>
+                                <p class="my-4">{!! substr (strip_tags($geral->descricao),0,100) . (strlen(strip_tags($geral->descricao)) > 100 ? '...' : '') !!}</p>
+                                <button type="button" class="btn btn-primary rounded-pill text-white py-2 px-4 mb-2" data-bs-toggle="modal" data-bs-target="#ModalView{{ $geral->id }}">
+                                    Ler mais
+                                  </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade text-justify" id="ModalView{{ $geral->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" style="margin-left: 2rem">{{ $geral->titulo }}</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{!! $geral->descricao !!}</p>
+                                </div>
+                                <div class="buttomb mt-5" style="position: relative">
+                                    <p style="position: absolute; bottom:0; left:30px;">Estado da atividade:
+                                        @if ($geral->estado == "NR")
+                                        <span class="" style="">Não Realizado</span>
+                                        @endif
+                                        @if ($geral->estado == "P")
+                                        <span class="" style="">No processo</span>
+                                        @endif
+                                        @if ($geral->estado == "R")
+                                            <span class="" style="">Realizado</span>
+                                        @endif
+
+                                        </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -297,6 +327,23 @@
             </div>
         </div>
         <!-- Blog End -->
+
+        <style>
+            .modal-header{
+                background: linear-gradient(to left,#15B9D9,#35ffeb 40%,#06849e);
+            }
+            .modal-title{
+                color: #fff !important;
+            }
+            .modal-content{
+                width: 80%;
+                margin-left: 5%;
+            }
+            .modal-body{
+                padding:4rem;
+            }
+
+        </style>
 
 
 

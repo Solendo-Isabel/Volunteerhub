@@ -32,7 +32,6 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-users me-2"></i>Membros</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ route('admin.membro.create.index') }}" class="dropdown-item">Criar</a>
                     <a href="{{ route('admin.membro.index') }}" class="dropdown-item">Listar</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user-circle me-2"></i>Associado</a>

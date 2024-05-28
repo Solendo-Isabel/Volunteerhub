@@ -14,7 +14,7 @@
         @endif
 
         <div class="form">
-            <h3>Login</h3>
+            <h3 class="text-center">Login</h3>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
@@ -54,23 +54,6 @@
 
 <style>
 
-    .form{
-        background-color: rgba(0, 0, 0, 0.5);
-        padding:10px;
-        border-radius: 0.35rem;
-        padding-left: 3rem;
-        width: 100%;
-        padding-right: 3rem;
-    }
 
-    .form h3{
-        color:#fff;
-        border-bottom:solid 1px rgb(114, 40, 114);
-        margin-bottom: 7rem;
-        width: 70px;
-    }
 
-    .underline{
-        color: #fff;
-    }
 </style>

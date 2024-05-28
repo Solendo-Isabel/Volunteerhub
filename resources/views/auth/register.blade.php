@@ -7,6 +7,7 @@
         <x-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('register') }}">
+            <h3 class="text-center">Registar</h3>
             @csrf
 
             <div>

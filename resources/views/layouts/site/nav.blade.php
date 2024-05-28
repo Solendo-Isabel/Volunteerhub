@@ -33,21 +33,9 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">Sobre nós</a>
-                        <a href="service.html" class="nav-item nav-link">Nossos serviços</a>
-                        <div class="nav-item dropdown">
-                          <!--  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="appointment.html" class="dropdown-item">Appointment</a>
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="blog.html" class="dropdown-item">Our Blog</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
-                            </div> -->
-
-                        </div>
                         <a href="contact.html" class="nav-item nav-link">Contacte-nos</a>
+                    </div>
+
                     </div>
                     @if(!Auth::check())
                         <span class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0" > <a href="{{ url('/register') }}">Registar</a> / <a href="{{ url('/login') }}">Entrar</a></span>
