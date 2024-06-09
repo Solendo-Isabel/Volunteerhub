@@ -11,7 +11,7 @@
 
 <style>
     .min-h-screen{
-        background:linear-gradient(rgb(173, 1, 173), #1664eb );
+        background:linear-gradient(#0a2f70,#0e4ebd);
         background-size: cover;
         height: 100vh;
         display: grid;

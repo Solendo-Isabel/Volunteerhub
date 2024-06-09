@@ -42,6 +42,23 @@
                     @endif
                     @if (Auth::check())
                         <a href="{{ url('/dash') }}" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Painel</a>
+                        <br>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                @if (isset(Auth::user()->imagem))
+                                <img class="rounded-circle" src="{{ asset(Auth::user()->imagem) }}" alt="" style="width: 40px; height: 40px;">
+                            @else
+                                <img class="rounded-circle" src="{{ asset('assets/images/unknown.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                            @endif
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                                <span class="d-none d-lg-inline-flex">{{ Auth::user()->vc_pr_nome }} {{ Auth::user()->vc_ult_nome }}</span>
+                                <a href="{{ url('/show') }}" class="dropdown-item">My Profile</a>
+                                <a href="#" class="dropdown-item">Settings</a>
+                                <a href="#" class="dropdown-item">Log Out</a>
+                            </div>
+                        </div>
+
                     @endif
                 </div>
             </nav>
@@ -50,7 +67,5 @@
     span{
         background: #fff !important;
     }
-    span:hover{
-        background: blue !important;
-    }
+
 </style>

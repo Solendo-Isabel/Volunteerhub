@@ -46,56 +46,7 @@
                     <h1 class="display-3 mb-4">Oferecemos meios de publicação de actividades voluntárias.</h1>
                     <p class="mb-0">Nossa plataforma se dedica a ajudar as organizações gerir o número de pessoas que se inscreve em suas atividades, assim como permite visualizar dados estatísticos para medir o nível de adesão às mesmas.</p>
                 </div>
-                <div class="row g-4 justify-content-center">
 
-                    @foreach ($atividades as $act)
-                <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" style="height: 500px; overflow: hidden;" data-wow-delay="0.3s">
-                    <div class="service-item rounded">
-                        <div class="service-img rounded-top">
-                            <img src="{{ asset('assets/images/login.jpg') }}" class="img-fluid rounded-top w-100" alt="">
-                        </div>
-                        <div class="service-content rounded-bottom bg-light">
-                            <div class="service-content-inner">
-                                <h5 class="mb-4">{{ $act->titulo }}</h5>
-                                <p class="mb-4">{!! substr(strip_tags($act->descricao), 0, 100) . (strlen(strip_tags($act->descricao)) > 100 ? '...' : '') !!}</p>
-                                <button type="button" class="btn btn-primary rounded-pill text-white py-2 px-4 mb-2" data-bs-toggle="modal" data-bs-target="#ModalView{{ $act->id }}">
-                                    Ler mais
-                                  </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade text-left" id="ModalView{{ $act->id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-xl" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" style="margin-left: 2rem">{{ $act->titulo }}</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>{!! $act->descricao !!}</p>
-                            </div>
-                            <div class="buttomb mt-5" style="position: relative">
-                                <p style="position: absolute; bottom:0; left:30px;">Estado da atividade:
-                                    @if ($act->estado == "NR")
-                                    <span class="" style="">Não Realizado</span>
-                                    @endif
-                                    @if ($act->estado == "P")
-                                    <span class="" style="">No Processo</span>
-                                    @endif
-                                    @if ($act->estado == "R")
-                                    <span class="" style="">Realizado</span>
-                                    @endif
-
-                                    </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-@endforeach
-              </div>
-            </div>
         </div>
         <!-- Services End -->
 
@@ -274,7 +225,7 @@
 
 
 
-                <div class="row g-4 justify-content-center">
+                <div class="row g-4">
                     @foreach ($atividades as $geral)
                     <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="blog-item rounded">
@@ -291,6 +242,7 @@
                                 <button type="button" class="btn btn-primary rounded-pill text-white py-2 px-4 mb-2" data-bs-toggle="modal" data-bs-target="#ModalView{{ $geral->id }}">
                                     Ler mais
                                   </button>
+
                             </div>
                         </div>
                     </div>
@@ -319,10 +271,34 @@
 
                                         </p>
                                 </div>
+
+                                @if ($geral->estado == "P" && isset(auth()->user()->id))
+                                <div class="cadastrar">
+                                    <form action="{{ route('admin.act_vol.store') }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        @if ($geral->id_voluntario == auth()->user()->id)
+                                        <label for="">User Id
+                                            <input type="text" value="{{ $geral->id_voluntario}}">
+                                        </label>
+                                        @endif
+                                        @if ($geral->id_atividade == $geral->id)
+                                        <label for=""> Id Actividade
+                                            <input type="text" value="{{ $geral->id_atividade }}">
+                                        </label>
+                                        @endif
+                                        <button type="submit">Me voluntariar</button>
+                                    </form>
+
+                                </div>
+                            @endif
+
+
                             </div>
                         </div>
                     </div>
                         @endforeach
+
+
                 </div>
             </div>
         </div>
@@ -344,6 +320,28 @@
             }
 
         </style>
+
+        <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
+        @if (session('act_vol.create.success'))
+                <script>
+                    Swal.fire(
+                        'act_vol Cadastrado Com Sucesso!',
+                        '',
+                        'success'
+                    )
+                </script>
+        @endif
+
+        @if (session('act_vol.create.error'))
+                <script>
+                    Swal.fire(
+                        'Erro ao cadastrar act_vol',
+                        '',
+                        'error'
+                    )
+                </script>
+
+            @endif
 
 
 
