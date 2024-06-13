@@ -66,13 +66,35 @@
                                         <span class="text-muted sr-only">Action</span>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="{{ route('admin.membro.edit.index',['id'=>$user->id]) }}">Editar</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ModalEdit{{$user->id}}">Editar</a>
                                         <a class="dropdown-item" href="{{ route('admin.membro.delete',['id'=>$user->id])}}">Eliminar</a>
                                         <a class="dropdown-item" href="{{ route('admin.membro.purge',['id'=>$user->id]) }}">Purgar</a>
                                     </div>
                                 </div>
 
                             </td>
+                            <div class="text-left modal fade" id="ModalEdit{{$user->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">{{ __('Editar Membro') }}</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('admin.membro.update', ['id' => $user->id]) }}
+                                                " method="post" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="card-body">
+                                                    @include('_forms.UserForm.index')
+                                                    <button type="submit" class="btn btn-primary w-md">Actualizar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </tr>
 
 
@@ -92,7 +114,33 @@
               </nav>
         </div>
     </div>
+    <button class="float-right ml-3 btn mt-3 btn-primary"
+    class="btn botao" data-toggle="modal" data-target="#ModalCreate"
+    type="button">Adicionar +</button>
 </div>
+
+<div class="text-left modal fade" id="ModalCreate" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ __('Adicionar Membro') }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('admin.membro.store')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
+                        {{ $user = null }}
+                        @include('_forms.UserForm.index')
+                        <button type="submit" class="btn btn-primary w-md">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
 
 <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
 @if (session('membro.delete.success'))

@@ -44,7 +44,7 @@
                         <tr>
                             <td>{{ $act->id }}</td>
                             <td>{{ $act->titulo }}</td>
-                            <td>{{ $act->descricao }}</td>
+                            <td>{!! substr(strip_tags($act->descricao), 0, 100) . (strlen(strip_tags($act->descricao)) > 100 ? '...' : '') !!}</td>
                             @if ($act->estado == "R")
                                 <td>Realizado</td>
                             @endif
@@ -54,7 +54,7 @@
                             @if ($act->estado == "NR")
                                 <td>Não Realizado</td>
                             @endif
-                            <td>{{ $act->desc_estado }}</td>
+                            <td>{!! substr(strip_tags($act->desc_estado), 0, 100) . (strlen(strip_tags($act->desc_estado)) > 100 ? '...' : '') !!}</td>
                             <td>{{ $act->data_inicio }}</td>
                             <td>{{ $act->data_fim }}</td>
 

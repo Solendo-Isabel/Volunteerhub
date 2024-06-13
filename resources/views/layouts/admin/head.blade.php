@@ -24,4 +24,20 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+
+    <!-- Trumbowyg -->
+
+    <link rel="stylesheet" href="{{ asset('assets/dist/ui/trumbowyg.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dist/plugins/emoji/ui/trumbowyg.emoji.min.css') }}">
+
+
+
+
+    <style>
+        h1,h2,h3,h4,h5,h6{color:black !important;}
+        #editor {
+            width: 100%;
+            height: 300px;
+        }
+    </style>
 </head>

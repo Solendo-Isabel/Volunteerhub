@@ -1,19 +1,17 @@
 @props(['disabled' => false])
 
-<input {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm']) !!}>
+<input class="form-control pb-2 input" {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => '']) !!}>
 
 <style>
-    input{
-        width: 100%;
-        margin-bottom: 2rem;
-        background: transparent;
-        border: none;
-        border-bottom: solid 1px #fff;
-        border-radius:0px;
-        height: 30px;
-    }
 
-    input:hover{
-        background: none;
-    }
+.input{
+    background: transparent !important;
+    border: none;
+    border-radius: 0;
+    border-bottom: solid 2px #fff;
+    margin-bottom: 2rem;
+}
+.input:focus{
+    background: transparent !important;
+}
 </style>

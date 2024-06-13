@@ -33,23 +33,39 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">Sobre nós</a>
-                        <a href="service.html" class="nav-item nav-link">Nossos serviços</a>
-                        <div class="nav-item dropdown">
-                          <!--  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="appointment.html" class="dropdown-item">Appointment</a>
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="blog.html" class="dropdown-item">Our Blog</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
-                            </div> -->
-
-                        </div>
                         <a href="contact.html" class="nav-item nav-link">Contacte-nos</a>
                     </div>
-                    <a href="{{ url('/dash') }}" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Painel</a>
+
+                    </div>
+                    @if(!Auth::check())
+                        <span class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0" > <a href="{{ url('/register') }}">Registar</a> / <a href="{{ url('/login') }}">Entrar</a></span>
+                    @endif
+                    @if (Auth::check())
+                        <a href="{{ url('/dash') }}" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Painel</a>
+                        <br>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                @if (isset(Auth::user()->imagem))
+                                <img class="rounded-circle" src="{{ asset(Auth::user()->imagem) }}" alt="" style="width: 40px; height: 40px;">
+                            @else
+                                <img class="rounded-circle" src="{{ asset('assets/images/unknown.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                            @endif
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                                <span class="d-none d-lg-inline-flex">{{ Auth::user()->vc_pr_nome }} {{ Auth::user()->vc_ult_nome }}</span>
+                                <a href="{{ url('/show') }}" class="dropdown-item">My Profile</a>
+                                <a href="#" class="dropdown-item">Settings</a>
+                                <a href="#" class="dropdown-item">Log Out</a>
+                            </div>
+                        </div>
+
+                    @endif
                 </div>
             </nav>
 
+<style>
+    span{
+        background: #fff !important;
+    }
+
+</style>

@@ -13,8 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('site.index');
+
+Route::/*middleware(['auth'])->*/namespace('App\Http\Controllers\Site')->group(function(){
+
+    route::get('/', ['as' => 'site.index', 'uses' => 'HomeController@index']);
+    route::get('view/{id}', ['as' => 'site.view', 'uses' => 'HomeController@view']);
+
+    Route::get('/show', function(){
+        return view('profile.show');
+    });
 });
 
 
@@ -95,5 +102,4 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),'verified',
                 Route::get('purge/{id}', ['as' => 'admin.act_vol.purge', 'uses'=> 'AtividadeVoluntarioController@purge']);
             });
         });
-
 });

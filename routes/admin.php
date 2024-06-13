@@ -12,8 +12,3 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::/*middleware(['auth'])->*/namespace('App\Http\Controllers\Admin')->group(function(){
-
-
-});

@@ -7,23 +7,28 @@ use Illuminate\Http\Request;
 use App\Models\Atividade;
 use App\Models\Voluntario;
 use App\Models\AtividadeVoluntario;
+use App\Models\User;
 
 class AtividadeVoluntarioController extends Controller
 {
     public function index(){
         $data['atividade_voluntarios'] = AtividadeVoluntario::join('atividades','atividades.id','=','atividade_voluntarios.id_atividade')
         ->join('voluntarios','voluntarios.id','=','atividade_voluntarios.id_voluntario')
-        ->select('atividade_voluntarios.*','atividades.titulo as atividade','voluntarios.id as voluntario')->get();
+        ->join('users','users.id', '=','voluntarios.id')
+        ->select('atividade_voluntarios.*','atividades.titulo as atividade','users.vc_pr_nome as voluntario','users.vc_nome_meio as voluntario2','users.vc_ult_nome as voluntario3')->get();
 
         $data['voluntarios']=Voluntario::all();
         $data['atividades']=Atividade::all();
+        $data['uses']=User::all();
 
         return view('admin.act_vol.index',$data);
     }
 
     public function create(){
-        $response['voluntarios']=Voluntario::all();
+        $response['voluntarios']=Voluntario::join("users","users.id", '=', 'voluntarios.id')
+        ->select('voluntarios.*', 'users.vc_pr_nome as voluntario','users.vc_nome_meio as voluntario2','users.vc_ult_nome as voluntario3')->get();
         $response['atividades']=Atividade::all();
+        $response['users']=User::all();
         return view('admin.act_vol.create.index',$response);
     }
 
@@ -55,6 +60,8 @@ class AtividadeVoluntarioController extends Controller
             return redirect()->back()->with('act_vol.create.success', 1);
         } catch (\Throwable $th) {
 
+            dd($th);
+
 
             return redirect()->back()->with('act_vol.create.error', 1);
         }
@@ -66,9 +73,11 @@ class AtividadeVoluntarioController extends Controller
     */
 
     public function edit($id){
-        $response['atividade_voluntarios']=AtividadeVoluntario::find($id);
-        $response['voluntarios']=Voluntario::all();
+        $response['act_vol']=AtividadeVoluntario::find($id);
+        $response['voluntarios']=Voluntario::join("users","users.id", '=', 'voluntarios.id')
+        ->select('voluntarios.*','users.vc_pr_nome as voluntario','users.vc_nome_meio as voluntario2','users.vc_ult_nome as voluntario3')->get();
         $response['atividades']=Atividade::all();
+        $response['users']=User::all();
         return view('admin.act_vol.edit.index',$response);
     }
 

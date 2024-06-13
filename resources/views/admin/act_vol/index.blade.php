@@ -36,11 +36,11 @@
                 </thead>
                 <tbody>
 
-                    @foreach ($atividade_voluntario as $act_vol)
+                    @foreach ($atividade_voluntarios as $act_vol)
                         <tr>
                             <td>{{ $act_vol->id }}</td>
-                            <td>{{ $act_vol->id_voluntario }}</td>
-                            <td>{{ $act_vol->id_atividade }}</td>
+                            <td>{{ $act_vol->voluntario }} {{ $act_vol->voluntario2 }} {{ $act_vol->voluntario3 }}</td>
+                            <td>{{ $act_vol->atividade }}</td>
 
                             <td>
                                 <div class="dropdown">

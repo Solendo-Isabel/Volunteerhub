@@ -38,9 +38,16 @@
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+
+                                    @if (isset(Auth::user()->imagem))
+                                        <img class="rounded-circle" src="{{ asset(Auth::user()->imagem) }}" alt="" style="width: 40px; height: 40px;">
+                                    @else
+                                        <img class="rounded-circle" src="{{ asset('assets/images/unknown.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                                    @endif
+
+
                                     <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <h6 class="fw-normal mb-0"> {{ Auth::user()->vc_pr_nome }} send you a message</h6>
                                         <small>15 minutes ago</small>
                                     </div>
                                 </div>
@@ -48,9 +55,13 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    @if (isset(Auth::user()->imagem))
+                                    <img class="rounded-circle" src="{{ asset(Auth::user()->imagem) }}" alt="" style="width: 40px; height: 40px;">
+                                @else
+                                    <img class="rounded-circle" src="{{ asset('assets/images/unknown.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                                @endif
                                     <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <h6 class="fw-normal mb-0">{{ Auth::user()->vc_pr_nome }} send you a message</h6>
                                         <small>15 minutes ago</small>
                                     </div>
                                 </div>
@@ -58,9 +69,13 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    @if (isset(Auth::user()->imagem))
+                                    <img class="rounded-circle" src="{{ asset(Auth::user()->imagem) }}" alt="" style="width: 40px; height: 40px;">
+                                @else
+                                    <img class="rounded-circle" src="{{ asset('assets/images/unknown.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                                @endif
                                     <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <h6 class="fw-normal mb-0">{{ Auth::user()->vc_pr_nome }} send you a message</h6>
                                         <small>15 minutes ago</small>
                                     </div>
                                 </div>
@@ -95,8 +110,12 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                            @if (isset(Auth::user()->imagem))
+                            <img class="rounded-circle" src="{{ asset(Auth::user()->imagem) }}" alt="" style="width: 40px; height: 40px;">
+                        @else
+                            <img class="rounded-circle" src="{{ asset('assets/images/unknown.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                        @endif
+                            <span class="d-none d-lg-inline-flex">{{ Auth::user()->vc_pr_nome }} {{ Auth::user()->vc_ult_nome }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
@@ -175,10 +194,70 @@
     <script src="{{asset('painel/js/apexcharts.custom.js')}}"></script>
     <script src="{{asset('painel/js/apps.js')}}"></script>
 
+
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+
+    <script src="{{ asset('assets/dist/trumbowyg.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('assets/dist/langs/pt_br.min.js') }}"></script>
+
+    <script src="{{ asset('assets/dist/plugins/emoji/trumbowyg.emoji.min.js') }}"></script>
+
+
+    <script>
+
+    $('#editor').trumbowyg({
+        lang: 'pt_br',
+        btns: [
+            ['viewHTML'],
+            ['undo', 'redo'], // Only supported in Blink browsers
+            ['formatting'],
+            ['strong', 'em', 'del'],
+            ['superscript', 'subscript'],
+            ['link'],
+            ['insertImage'],
+            ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+            ['unorderedList', 'orderedList'],
+            ['horizontalRule'],
+            ['removeformat'],
+            ['emoji'],
+            ['fullscreen']
+        ],
+        autogrow: true
+    });
+
+    $('#desc_estado').trumbowyg({
+        lang: 'pt_br',
+        btns: [
+            ['viewHTML'],
+            ['undo', 'redo'], // Only supported in Blink browsers
+            ['formatting'],
+            ['strong', 'em', 'del'],
+            ['superscript', 'subscript'],
+            ['link'],
+            ['insertImage'],
+            ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+            ['unorderedList', 'orderedList'],
+            ['horizontalRule'],
+            ['removeformat'],
+            ['emoji'],
+            ['fullscreen']
+        ],
+        autogrow: true
+    });
+
+</script>
+
+
+
+
+
+
     <!-- Template Javascript -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 </body>
 
 </html>

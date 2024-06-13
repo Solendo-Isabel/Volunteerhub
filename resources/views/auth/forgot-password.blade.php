@@ -4,7 +4,7 @@
             <x-authentication-card-logo />
         </x-slot>
 
-        <div class="mb-4 text-sm text-gray-600">
+        <div class="mb-4 text-sm text">
             {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
         </div>
 
@@ -32,3 +32,9 @@
         </form>
     </x-authentication-card>
 </x-guest-layout>
+
+<style>
+    .text{
+        color: #fff;
+    }
+</style>
