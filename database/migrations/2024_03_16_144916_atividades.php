@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('desc_estado');
             $table->date('data_inicio');
             $table->date('data_fim');
+            $table->unsignedBigInteger('it_id_org');
+            $table->foreign('it_id_org')->references('id')->on('organizacoes')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
