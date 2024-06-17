@@ -35,6 +35,7 @@
                         <th scope="col">Descrição do Estado</th>
                         <th scope="col">Data de Início</th>
                         <th scope="col">Data de Término</th>
+                        <th scope="col">Organização</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -57,6 +58,7 @@
                             <td>{!! substr(strip_tags($act->desc_estado), 0, 100) . (strlen(strip_tags($act->desc_estado)) > 100 ? '...' : '') !!}</td>
                             <td>{{ $act->data_inicio }}</td>
                             <td>{{ $act->data_fim }}</td>
+                            <td>{{ $act->organizacao }}</td>
 
                             <td>
                                 <div class="dropdown">
