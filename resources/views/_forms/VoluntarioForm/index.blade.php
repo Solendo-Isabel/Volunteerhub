@@ -22,10 +22,6 @@
         </span>
         @enderror
         </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> cca9b14f604134edf58c9ee7b9923c3c59cbd9aa
     </div>
 </div>
 

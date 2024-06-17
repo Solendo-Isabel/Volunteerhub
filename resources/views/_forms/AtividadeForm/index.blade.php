@@ -95,6 +95,28 @@
            <strong>{{ $message }}</strong>
        </span>
        @enderror
+
+       </div>
+
+       <br>
+       <div class="form-floating mb-3">
+        <label for="it_id_org">Organização</label> <br>
+        <select name="it_id_org" id="it_id_org" class="form-control select2" required>
+            @if (!isset($atividades->it_id_org))
+                <option value=""  disabled selected>Selecione um ítem</option>
+            @endif
+
+            @foreach ($organizacoes as $org)
+                <option value="{{ $org->id }}"  {{ isset($atividades) ? ($atividades->it_id_org == $org->id ? 'selected' : ""):""}}>{{ $org->vc_nome }}</option>
+            @endforeach
+        </select>
+
+        @error('id')
+    <span class="invalid-feedbackj" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+    @enderror
+
        </div>
 
 

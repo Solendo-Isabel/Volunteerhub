@@ -43,11 +43,11 @@ class VoluntarioController extends Controller
                 ]);
 
 
-
             return redirect()->back()->with('voluntario.create.success', 1);
-        } catch (\Throwable $th) {
+            
+        } catch (Throwable $th) {
 
-
+                dd($th);
             return redirect()->back()->with('voluntario.create.error', 1);
         }
     }

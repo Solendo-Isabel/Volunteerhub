@@ -241,7 +241,27 @@
                                 <p class="my-4">{!! substr (strip_tags($geral->descricao),0,100) . (strlen(strip_tags($geral->descricao)) > 100 ? '...' : '') !!}</p>
                                 <button type="button" class="btn btn-primary rounded-pill text-white py-2 px-4 mb-2" data-bs-toggle="modal" data-bs-target="#ModalView{{ $geral->id }}">
                                     Ler mais
-                                  </button>
+                                  </button> 
+                                  
+                                  @php
+                                      $close = 1;
+                                  @endphp
+                                
+                                  @foreach ($atividade2 as $act )
+                                    @if (Auth::user()->id == $act->id_voluntario && $geral->id == $act->id_atividade)
+                                        <button  class="form-control mt-2" data-bs-toggle="modal" data-bs-target="#ModalDelete{{ $geral->id }}">Já se voluntariou!</button>
+                                        @php
+                                            $close = 0;
+                                        @endphp
+                                    @endif
+                                  @endforeach
+                                  @if ($close != 0 && $geral->estado == "P")
+                                     <button type="button" class="btn btn-success rounded-pill text-white py-2 px-4 mb-2" data-bs-toggle="modal" data-bs-target="#Modal{{$geral->id}}"> Me voluntariar</button>
+                                  @endif
+                                  @if ($geral->estado == "R" || $geral->estado == "NR")
+                                  <button type="button" class="btn btn-danger rounded-pill text-white py-2 px-4 mb-2" disabled> Não disponível</button>
+                                  @endif
+                                
 
                             </div>
                         </div>
@@ -272,31 +292,76 @@
                                         </p>
                                 </div>
 
-                                @if ($geral->estado == "P" && isset(auth()->user()->id))
-                                <div class="cadastrar">
-                                    <form action="{{ route('admin.act_vol.store') }}" method="post" enctype="multipart/form-data">
-                                        @csrf
-                                        @if ($geral->id_voluntario == auth()->user()->id)
-                                        <label for="">User Id
-                                            <input type="text" value="{{ $geral->id_voluntario}}">
-                                        </label>
-                                        @endif
-                                        @if ($geral->id_atividade == $geral->id)
-                                        <label for=""> Id Actividade
-                                            <input type="text" value="{{ $geral->id_atividade }}">
-                                        </label>
-                                        @endif
-                                        <button type="submit">Me voluntariar</button>
-                                    </form>
 
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade text-justify" id="Modal{{$geral->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" style="margin-left: 2rem">Estamos à sua espera</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                            @endif
+                                <div class="modal-body">
+                                    <form action="{{route('admin.act_vol.store')}}" method="post" enctype="multipart/form-data" class="mt-3 mb-5">
+                                        @csrf
+                                        <select name="id_atividade" id="id_atividade" class="form-control select2" required hidden>
+                                            @foreach ($atividades as $atividade)
+                                                @if ($geral->id == $atividade->id)
+                                                 <option type="text" value="{{$atividade->id}}" > {{$atividade->titulo}} </option>
+                                                @endif
+                                           
+                                        @endforeach
+                                        </select>
+                                        <br>
+                                        <select name="id_voluntario" id="id_voluntario" class="form-control select2" required hidden>
+                                            @foreach ($voluntarios as $voluntario)
+                                                @if (Auth::user()->id == $voluntario->id)
+                                                 <option value="{{ $voluntario->id }}">{{ $voluntario->voluntario }} {{ $voluntario->voluntario2 }} {{ $voluntario->voluntario3 }}</option>
+                                                @endif
+                                                
+                                            @endforeach
+                                        </select>
+                                        <h3>Confirme aqui sua candidatura!!!</h3>
+                                        <br>
+                                        <button class="btn btn-outline-primary w-100 m-2" style="width: 82% !important; margin-left: 9% !important; color: #fff; background:linear-gradient(to left,#7357D6,#8b329d8a,#9479f6)"><strong>Candidatar-me</strong></button>
+                                    </form>
+                                </div>
 
 
                             </div>
                         </div>
                     </div>
+
+                    <div class="modal fade text-justify" id="ModalDelete{{$geral->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" style="margin-left: 2rem">Estamos à sua espera</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    @foreach ($atividade2 as $act)
+                                        @if ($geral->id == $act->id_atividade)
+                                        <button class="form-control" type="button"><a href="{{ route('admin.act_vol.delete',['id'=>$act->id])}}">Cancelar sua candidatura</a></button>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
                         @endforeach
+
+
+
+                           
+                        </div>
+                       
 
 
                 </div>
@@ -321,27 +386,44 @@
 
         </style>
 
-        <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
-        @if (session('act_vol.create.success'))
-                <script>
-                    Swal.fire(
-                        'act_vol Cadastrado Com Sucesso!',
-                        '',
-                        'success'
-                    )
-                </script>
-        @endif
-
-        @if (session('act_vol.create.error'))
-                <script>
-                    Swal.fire(
-                        'Erro ao cadastrar act_vol',
-                        '',
-                        'error'
-                    )
-                </script>
-
-            @endif
+<script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
+@if (session('act_vol.delete.success'))
+    <script>
+        Swal.fire(
+            'act_vol Eliminado com sucesso!',
+            '',
+            'success'
+        )
+    </script>
+@endif
+@if (session('act_vol.delete.error'))
+    <script>
+        Swal.fire(
+            'Erro ao Eliminar act_vol!',
+            '',
+            'error'
+        )
+    </script>
+@endif
+@if (session('act_vol.purge.success'))
+    <script>
+        Swal.fire(
+            'act_vol Purgada com sucesso!',
+            '',
+            'success'
+        )
+    </script>
+@endif
+@if (session('act_vol.purge.error'))
+    <script>
+        Swal.fire(
+            'Erro ao Purgar act_vol!',
+            '',
+            'error'
+        )
+    </script>
+@endif
+            
 
 
 

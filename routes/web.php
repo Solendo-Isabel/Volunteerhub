@@ -18,6 +18,7 @@ Route::/*middleware(['auth'])->*/namespace('App\Http\Controllers\Site')->group(f
 
     route::get('/', ['as' => 'site.index', 'uses' => 'HomeController@index']);
     route::get('view/{id}', ['as' => 'site.view', 'uses' => 'HomeController@view']);
+    Route::get('/perfil', ['as' => 'myprofile.index', 'uses' => 'ProfileController@index']);
 
     Route::get('/show', function(){
         return view('profile.show');
@@ -39,6 +40,8 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),'verified',
 
         Route::get('/dash', function () {
             return view('admin.dashboard');});
+        
+       
 
 
         Route::prefix('organizacao')->group(function(){

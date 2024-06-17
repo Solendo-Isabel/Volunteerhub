@@ -141,7 +141,7 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ url('/dash') }}" :active="request()->routeIs('admin.dashboard')">
                 {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            </x-responsive-nav-link> 
         </div>
 
         <!-- Responsive Settings Options -->

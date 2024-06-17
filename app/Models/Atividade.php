@@ -17,7 +17,8 @@ class Atividade extends Model
         'estado',
         'data_inicio',
         'data_fim',
-        'desc_estado'
+        'desc_estado',
+        'it_id_org'
     ];
 
     protected $table = 'atividades';

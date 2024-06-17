@@ -1,9 +1,5 @@
 @extends('layouts.admin.body')
-<<<<<<< HEAD
-@section('titulo','Listar Voluntarios')
-=======
 @section('titulo','Listar voluntarios')
->>>>>>> cca9b14f604134edf58c9ee7b9923c3c59cbd9aa
 
 @section('conteudo')
 
@@ -27,11 +23,7 @@
         </div>
       </form>
     <div class="bg-secondary rounded h-100 p-4">
-<<<<<<< HEAD
-        <h6 class="mb-4">Voluntarios</h6>
-=======
         <h6 class="mb-4">voluntarios</h6>
->>>>>>> cca9b14f604134edf58c9ee7b9923c3c59cbd9aa
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -46,11 +38,7 @@
                     @foreach ($voluntarios as $vol)
                         <tr>
                             <td>{{ $vol->id }}</td>
-<<<<<<< HEAD
-                            <td>{{ $vol->nome1 }} {{ $vol->nome2 }} {{ $vol->nome3 }}</td>
-=======
                             <td>{{ $vol->membro }}</td>
->>>>>>> cca9b14f604134edf58c9ee7b9923c3c59cbd9aa
 
                             <td>
                                 <div class="dropdown">
@@ -58,10 +46,6 @@
                                         <span class="text-muted sr-only">Action</span>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
-<<<<<<< HEAD
-                                        <a class="dropdown-item" href="{{ route('admin.voluntario.edit.index',['id'=>$vol->id]) }}">Editar</a>
-=======
->>>>>>> cca9b14f604134edf58c9ee7b9923c3c59cbd9aa
                                         <a class="dropdown-item" href="{{ route('admin.voluntario.delete',['id'=>$vol->id])}}">Eliminar</a>
                                         <a class="dropdown-item" href="{{ route('admin.voluntario.purge',['id'=>$vol->id]) }}">Purgar</a>
                                     </div>

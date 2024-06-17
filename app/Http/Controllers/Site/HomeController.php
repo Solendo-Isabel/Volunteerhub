@@ -13,14 +13,15 @@ use App\Models\User;
 class HomeController extends Controller
 {
     public function index(){
-        $data['atividades'] = AtividadeVoluntario::join('atividades','atividades.id','=','atividade_voluntarios.id_atividade')
+        $data['atividade2'] = AtividadeVoluntario::join('atividades','atividades.id','=','atividade_voluntarios.id_atividade')
         ->join('voluntarios','voluntarios.id','=','atividade_voluntarios.id_voluntario')
         ->join('users','users.id', '=','voluntarios.id')
         ->select('atividade_voluntarios.*','atividades.titulo as atividade','users.vc_pr_nome as voluntario','users.vc_nome_meio as voluntario2','users.vc_ult_nome as voluntario3')->get();
 
-        $data['voluntarios']=Voluntario::all();
+        $data['voluntarios']=Voluntario::join("users","users.id", '=', 'voluntarios.id')
+        ->select('voluntarios.*', 'users.vc_pr_nome as voluntario','users.vc_nome_meio as voluntario2','users.vc_ult_nome as voluntario3')->get();
         $data['atividades']=Atividade::all();
-        $data['uses']=User::all();
+        $data['users']=User::all();
 
         return view('site.index',$data);
 

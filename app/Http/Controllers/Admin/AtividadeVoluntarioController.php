@@ -19,7 +19,7 @@ class AtividadeVoluntarioController extends Controller
 
         $data['voluntarios']=Voluntario::all();
         $data['atividades']=Atividade::all();
-        $data['uses']=User::all();
+        $data['users']=User::all();
 
         return view('admin.act_vol.index',$data);
     }
@@ -127,8 +127,9 @@ class AtividadeVoluntarioController extends Controller
             $act_vol=AtividadeVoluntario::findOrFail($id)->delete();
 
             return redirect()->back()->with('act_vol.delete.success',1);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return redirect()->back()->with('act_vol.delete.error',1);
+            dd($th);
             //throw $th;
         }
 
@@ -139,7 +140,7 @@ class AtividadeVoluntarioController extends Controller
             $act_vol=AtividadeVoluntario::findOrFail($id)->forceDelete();
 
             return redirect()->back()->with('act_vol.purge.success',1);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return redirect()->back()->with('act_vol.purge.error',1);
             //throw $th;
         }
