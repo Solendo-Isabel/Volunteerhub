@@ -5,17 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Atividade;
+use App\Models\Organizacao;
 
 class AtividadeController extends Controller
 {
     public function index(){
-        $data['atividades'] = Atividade::all();
+        $data['atividades'] = Atividade::join('organizacoes', 'organizacoes.id', '=', 'atividades.it_id_org')
+            ->select('atividades.*','organizacoes.vc_nome as organizacao')
+            ->get();
+
+        $data['organizacoes'] = Organizacao::all();
 
         return view('admin.atividade.index',$data);
     }
 
     public function create(){
-        return view('admin.atividade.create.index');
+        $response['organizacoes']=Organizacao::all();
+        return view('admin.atividade.create.index',$response);
     }
 
     /**
@@ -32,7 +38,8 @@ class AtividadeController extends Controller
                 'estado' => 'required',
                 'data_inicio' => 'required',
                 'data_fim' => 'required',
-                'desc_estado' => 'required'
+                'desc_estado' => 'required',
+                'it_id_org' => 'required'
 
             ], [
                 'titulo.required' => 'Campo obrigatório',
@@ -40,7 +47,8 @@ class AtividadeController extends Controller
                 'estado.required' => 'Campo obrigatório',
                 'data_inicio.required' => 'Campo obrigatório',
                 'data_fim.required' => 'Campo obrigatório',
-                'desc_estado.required' => 'Campo obrigatório'
+                'desc_estado.required' => 'Campo obrigatório',
+                'it_id_org.required' => 'Campo obrigatório'
             ]);
 
 
@@ -51,7 +59,8 @@ class AtividadeController extends Controller
                     'estado' => $request->estado,
                     'data_inicio' => $request->data_inicio,
                     'data_fim' => $request->data_fim,
-                    'desc_estado' => $request->desc_estado
+                    'desc_estado' => $request->desc_estado,
+                    'it_id_org' => $request->it_id_org
                 ]);
 
 
@@ -71,6 +80,7 @@ class AtividadeController extends Controller
 
     public function edit($id){
         $response['atividade']=Atividade::find($id);
+        $response['organizacoes']=Organizacao::all();
         return view('admin.atividade.edit.index',$response);
     }
 
@@ -92,7 +102,8 @@ class AtividadeController extends Controller
                 'estado' => 'required',
                 'data_inicio' => 'required',
                 'data_fim' => 'required',
-                'desc_estado' => 'required'
+                'desc_estado' => 'required',
+                'it_id_org' => 'required'
 
             ], [
                 'titulo.required' => 'Campo obrigatório',
@@ -100,9 +111,9 @@ class AtividadeController extends Controller
                 'estado.required' => 'Campo obrigatório',
                 'data_inicio.required' => 'Campo obrigatório',
                 'data_fim.required' => 'Campo obrigatório',
-                'desc_estado.required' => 'Campo obrigatório'
+                'desc_estado.required' => 'Campo obrigatório',
+                'it_id_org.required' => 'Campo obrigatório'
             ]);
-
 
             Atividade::findOrFail($id)->update([
                 'titulo' => $request->titulo,
@@ -110,7 +121,8 @@ class AtividadeController extends Controller
                 'estado' => $request->estado,
                 'data_inicio' => $request->data_inicio,
                 'data_fim' => $request->data_fim,
-                'desc_estado' => $request->desc_estado
+                'desc_estado' => $request->desc_estado,
+                'it_id_org' => $request->it_id_org
             ]);
 
 
